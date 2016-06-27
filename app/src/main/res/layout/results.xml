@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="10dp"
+    android:background="@color/bk_main">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/choose_an_option_below"
+            android:textColor="@color/off_white"
+            android:padding="3dp"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/bk_for"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="@string/result_header"
+            android:textColor="@color/off_white"
+            android:gravity="center"
+            android:padding="5dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/class_test"
+            android:textColor="@color/off_white"
+            android:textSize="22sp"
+            android:id="@+id/btn_ct_input"
+            android:background="@drawable/background_btn_default"
+            android:layout_margin="5dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:text="@string/attendance"
+            android:textSize="14sp"
+            android:textColor="@color/off_white"
+            android:id="@+id/button3"
+            android:background="@drawable/background_btn_default"
+            android:layout_margin="5dp"/>
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:text="@string/assignment"
+            android:textSize="14sp"
+            android:textColor="@color/off_white"
+            android:id="@+id/button4"
+            android:background="@drawable/background_btn_default"
+            android:layout_margin="5dp"/>
+        <Button
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:text="@string/quize"
+            android:textSize="14sp"
+            android:textColor="@color/off_white"
+            android:id="@+id/button5"
+            android:background="@drawable/background_btn_default"
+            android:layout_margin="5dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:text="@string/lab_marks"
+            android:textSize="14sp"
+            android:textColor="@color/off_white"
+            android:id="@+id/button6"
+            android:background="@drawable/background_btn_default"
+            android:layout_margin="5dp" />
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:text="@string/lab_final"
+            android:textSize="14sp"
+            android:textColor="@color/off_white"
+            android:id="@+id/button7"
+            android:background="@drawable/background_btn_default"
+            android:layout_margin="5dp"/>
+        <Button
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:text="@string/board_viva"
+            android:textSize="14sp"
+            android:textColor="@color/off_white"
+            android:id="@+id/button8"
+            android:background="@drawable/background_btn_default"
+            android:layout_margin="5dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/final_exam"
+            android:textSize="22sp"
+            android:textColor="@color/off_white"
+            android:id="@+id/button2"
+            android:background="@drawable/background_btn_default"
+            android:layout_margin="5dp"/>
+    </LinearLayout>
+</LinearLayout>
