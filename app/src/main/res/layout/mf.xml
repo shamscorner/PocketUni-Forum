@@ -82,7 +82,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:id="@+id/click"
-                android:text="@string/done"
+                android:text="@string/open"
                 android:textSize="20sp"
                 android:textColor="@color/off_white"
                 android:background="@drawable/background_btn_default_back" />
