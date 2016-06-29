@@ -99,7 +99,8 @@
                     android:id="@+id/btn_take_photo"
                     android:background="@drawable/background_btn_default"
                     android:textColor="@color/off_white"
-                    android:textSize="18sp"/>
+                    android:textSize="18sp"
+                    android:onClick="takePhotoForRegistration"/>
 
                 <View
                     android:layout_width="match_parent"
@@ -116,7 +117,8 @@
                     android:id="@+id/btn_reg_done"
                     android:background="@drawable/background_btn_default"
                     android:textColor="@color/off_white"
-                    android:textSize="18sp"/>
+                    android:textSize="18sp"
+                    android:onClick="doneRegistration"/>
 
             </LinearLayout>
         </LinearLayout>
