@@ -53,6 +53,8 @@ public class CourseRegistration extends AppCompatActivity {
     String ba1;
     String mCurrentPhotoPath;
 
+    private boolean successPicture;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,10 +76,14 @@ public class CourseRegistration extends AppCompatActivity {
     }
 
     public void doneRegistration(View view) {
-        //upload the picture
-        upload();
-        // Upload image to server
-        new uploadToServer().execute();
+        if(successPicture){
+            //upload the picture
+            upload();
+            // Upload image to server
+            new uploadToServer().execute();
+        }else{
+            Toast.makeText(getApplicationContext(), "Picture verification is missing", Toast.LENGTH_LONG).show();
+        }
     }
     private void upload() {
         Bitmap bm = BitmapFactory.decodeFile(mCurrentPhotoPath);
@@ -148,6 +154,8 @@ public class CourseRegistration extends AppCompatActivity {
 
             Bitmap bitmap = BitmapFactory.decodeFile(mCurrentPhotoPath, bmOptions);
             imgRegProof.setImageBitmap(bitmap);
+
+            successPicture = true;
         }
     }
 
