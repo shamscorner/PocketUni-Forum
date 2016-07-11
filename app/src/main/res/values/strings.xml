@@ -88,4 +88,6 @@
     <string name="semester_footer">All Informations are authorized by RUET administrator.</string>
     <string name="title_activity_course_registration">Course Registration</string>
     <string name="open">Open</string>
+    <string name="title_activity_success">Operation Successful</string>
+    <string name="ok">OK</string>
 </resources>

@@ -23,6 +23,7 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.shamsapp.shamscorner.com.pocketuni_forum.R;
+import com.shamsapp.shamscorner.com.pocketuni_forum.SuccessActivity;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
@@ -200,6 +201,21 @@ public class CourseRegistration extends AppCompatActivity {
             super.onPostExecute(result);
             pd.hide();
             pd.dismiss();
+
+            Log.d("Happen", result);
+            if(result.equals("uploaded")){
+                Intent intent = new Intent(getApplicationContext(), SuccessActivity.class);
+                intent.putExtra("RESULT", result);
+                intent.putExtra("SUCCESS_TEXT", "Course registration has been successfully completed");
+                startActivity(intent);
+            }else if(result.equals("failed")){
+                Intent intent = new Intent(getApplicationContext(), SuccessActivity.class);
+                intent.putExtra("RESULT", result);
+                intent.putExtra("SUCCESS_TEXT", "You have already registered");
+                startActivity(intent);
+            }else{
+                Toast.makeText(getApplicationContext(), "Something went wrong", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 }
