@@ -13,11 +13,14 @@
 
 
     <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_width="235dp"
+        android:layout_height="235dp"
+        android:padding="35dp"
         android:id="@+id/success_mark"
-        android:layout_marginTop="40dp"
-        android:layout_marginBottom="40dp"/>
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="30dp"
+        android:background="@drawable/anim_for_success"/>
 
     <TextView
         android:layout_width="match_parent"
@@ -26,7 +29,7 @@
         android:textColor="@color/off_white"
         android:gravity="center"
         android:id="@+id/success_text"
-        android:layout_marginBottom="40dp"/>
+        android:layout_marginBottom="30dp"/>
 
     <Button
         android:layout_width="match_parent"

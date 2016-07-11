@@ -1,6 +1,7 @@
 package com.shamsapp.shamscorner.com.pocketuni_forum;
 
 import android.content.Intent;
+import android.graphics.drawable.AnimationDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -13,6 +14,7 @@ public class SuccessActivity extends AppCompatActivity {
     private String result, successText = "";
     private TextView successView;
     private ImageView imgMark;
+    private AnimationDrawable frameAnimation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,10 +30,12 @@ public class SuccessActivity extends AppCompatActivity {
         successView = (TextView)findViewById(R.id.success_text);
         successView.setText(""+successText);
         imgMark = (ImageView) findViewById(R.id.success_mark);
+        frameAnimation = (AnimationDrawable) imgMark.getBackground();
+        frameAnimation.start();
         if(result.equals("uploaded")){
-
+            imgMark.setImageResource(R.drawable.tickmark);
         }else if(result.equals("failed")){
-
+            imgMark.setImageResource(R.drawable.crossmark);
         }
 
     }
