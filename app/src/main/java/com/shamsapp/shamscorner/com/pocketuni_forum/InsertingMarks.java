@@ -23,7 +23,7 @@ public class InsertingMarks extends AppCompatActivity {
     private String semester, section, department, courseId, rollNo;
     private LayoutInflater inflater;
     private LinearLayout mainContainer;
-    private int student, ctNo;
+    private int student, ctNo, from = 1, to;
     private View v;
     private Button btnDone;
     private TextView tvError;
@@ -64,7 +64,16 @@ public class InsertingMarks extends AppCompatActivity {
         inflater = LayoutInflater.from(InsertingMarks.this);
         mainContainer = (LinearLayout)findViewById(R.id.main_container);
 
-        for(int i = 1; i <= student; i++){
+        if(semester.equals("a")){
+            from = 1;
+        }else if(semester.equals("b")){
+            from = 1 + (student-1);
+        }else if(semester.equals("c")){
+            from = 1 + (student*2 - 1);
+        }
+        to = from + student;
+
+        for(int i = from; i <= to; i++){
             v = inflater.inflate(R.layout.marks_input, null);
             ((TextView)v.findViewById(R.id.tv_roll)).setText(""+i);
             //editTexts[i] = (EditText)v.findViewById(R.id.edt_marks);
