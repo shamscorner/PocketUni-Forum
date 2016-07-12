@@ -216,11 +216,13 @@ public class CourseRegistration extends AppCompatActivity {
                 intent.putExtra("RESULT", result);
                 intent.putExtra("SUCCESS_TEXT", "Course registration has been successfully completed");
                 startActivity(intent);
+                finish();
             }else if(result.equals("failed")){
                 Intent intent = new Intent(getApplicationContext(), SuccessActivity.class);
                 intent.putExtra("RESULT", result);
                 intent.putExtra("SUCCESS_TEXT", "You have already registered");
                 startActivity(intent);
+                finish();
             }else{
                 Toast.makeText(getApplicationContext(), "Something went wrong", Toast.LENGTH_SHORT).show();
             }
