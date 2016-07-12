@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="6dp"
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="5dp"
+    android:layout_marginTop="3dp"
+    android:layout_marginBottom="2dp"
+    android:background="@color/bk_main">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="DR. Md. Najrul Islam Mondol"
+        android:id="@+id/contact_name"
+        android:textColor="@color/off_white"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Lecturer"
+            android:id="@+id/contact_rank"
+            android:layout_alignParentTop="true"
+            android:textColor="@color/off_white"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CSE"
+            android:id="@+id/contact_dept"
+            android:layout_below="@+id/contact_rank"
+            android:textColor="@color/off_white"/>
+
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:text="@string/call_btn_text"
+            android:id="@+id/btn_contact_call"
+            android:layout_alignParentTop="true"
+            android:layout_toLeftOf="@+id/btn_contact_email"
+            android:layout_toStartOf="@+id/btn_contact_email"
+            android:textColor="@color/off_white"
+            android:background="@drawable/background_button"
+            android:layout_margin="3dp"/>
+
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:text="@string/email"
+            android:id="@+id/btn_contact_email"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:textColor="@color/off_white"
+            android:background="@drawable/background_button"
+            android:layout_margin="3dp"/>
+    </RelativeLayout>
+</LinearLayout>

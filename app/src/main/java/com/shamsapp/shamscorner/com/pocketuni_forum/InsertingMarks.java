@@ -20,7 +20,7 @@ import java.util.ArrayList;
 
 public class InsertingMarks extends AppCompatActivity {
 
-    private String semester, section, department, courseId, rollNo;
+    private String semester, section, department, courseId, username;
     private LayoutInflater inflater;
     private LinearLayout mainContainer;
     private int student, ctNo, from = 1, to;
@@ -29,6 +29,7 @@ public class InsertingMarks extends AppCompatActivity {
     private TextView tvError;
     //private EditText[] editTexts = new EditText[200];
     private ArrayList<EditText> marksList = new ArrayList<>();
+    private ArrayList<Integer> rollNOs = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +52,7 @@ public class InsertingMarks extends AppCompatActivity {
 
         Bundle extras = getIntent().getExtras();
         if(extras != null){
-            rollNo = extras.getString("ROLLNO");
+            username = extras.getString("ROLLNO");
             semester = extras.getString("SEMESTER");
             section = extras.getString("SECTION");
             department = extras.getString("DEPARTMENT");
@@ -76,6 +77,7 @@ public class InsertingMarks extends AppCompatActivity {
         for(int i = from; i <= to; i++){
             v = inflater.inflate(R.layout.marks_input, null);
             ((TextView)v.findViewById(R.id.tv_roll)).setText(""+i);
+            rollNOs.add(i);
             //editTexts[i] = (EditText)v.findViewById(R.id.edt_marks);
             marksList.add((EditText)v.findViewById(R.id.edt_marks));
             mainContainer.addView(v);
@@ -86,7 +88,7 @@ public class InsertingMarks extends AppCompatActivity {
             public void onClick(View v) {
                 for(int i = 0; i < student; i++){
                     //Log.d("val",(marksList.get(i)).getText().toString().trim());
-                    new CTMarksInserted(getApplicationContext(), tvError).execute(""+ctNo, rollNo, courseId, semester, section, marksList.get(i).getText().toString().trim());
+                    new CTMarksInserted(getApplicationContext(), tvError).execute(""+ctNo, ""+rollNOs.get(i), courseId, semester, section, department, marksList.get(i).getText().toString().trim());
                 }
             }
         });

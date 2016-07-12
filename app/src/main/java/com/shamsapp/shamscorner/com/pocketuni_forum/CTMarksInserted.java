@@ -20,7 +20,7 @@ public class CTMarksInserted extends AsyncTask<String, Void, String> {
 
     private TextView tvError;
     private Context context;
-    String ctNo, rollNo, courseId, semester, marks, section;
+    String ctNo, rollNo, courseId, semester, marks, section, department;
     ProgressDialog progressDialog;
 
     public CTMarksInserted(Context context, TextView tvError){
@@ -40,7 +40,8 @@ public class CTMarksInserted extends AsyncTask<String, Void, String> {
             courseId = arg[2];
             semester = arg[3];
             section = arg[4];
-            marks = arg[5];
+            department = arg[5];
+            marks = arg[6];
 
             String link = "http://shamscorner001.site88.net/Uni_Forumb69c5929474a3779df762577b7cce8eb/UniForum/mlogin.php";
             String data = URLEncoder.encode("ct_no", "UTF-8") + "=" + URLEncoder.encode(ctNo, "UTF-8");
@@ -48,6 +49,7 @@ public class CTMarksInserted extends AsyncTask<String, Void, String> {
             data += "&" + URLEncoder.encode("course_id", "UTF-8") + "=" + URLEncoder.encode(courseId, "UTF-8");
             data += "&" + URLEncoder.encode("semester", "UTF-8") + "=" + URLEncoder.encode(semester, "UTF-8");
             data += "&" + URLEncoder.encode("section", "UTF-8") + "=" + URLEncoder.encode(section, "UTF-8");
+            data += "&" + URLEncoder.encode("department", "UTF-8") + "=" + URLEncoder.encode(department, "UTF-8");
             data += "&" + URLEncoder.encode("marks", "UTF-8") + "=" + URLEncoder.encode(marks, "UTF-8");
 
             URL url = new URL(link);

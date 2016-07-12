@@ -90,4 +90,5 @@
     <string name="open">Open</string>
     <string name="title_activity_success">Operation Successful</string>
     <string name="ok">OK</string>
+    <string name="email">Email</string>
 </resources>
