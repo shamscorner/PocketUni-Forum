@@ -4,11 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="6dp"
-    android:layout_marginLeft="5dp"
-    android:layout_marginRight="5dp"
-    android:layout_marginTop="3dp"
-    android:layout_marginBottom="2dp"
-    android:background="@color/bk_main">
+    android:background="@color/bk_main"
+    android:id="@+id/details_touch">
 
     <TextView
         android:layout_width="wrap_content"
@@ -64,4 +61,10 @@
             android:background="@drawable/background_button"
             android:layout_margin="3dp"/>
     </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/bk_for"
+        android:layout_marginTop="5dp"/>
 </LinearLayout>
