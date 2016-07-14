@@ -1,17 +1,26 @@
 package com.shamsapp.shamscorner.com.pocketuni_forum;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Toast;
+
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesUtil;
 
 /**
  * Created by ShamimH on 21-May-16.
  */
 public class SplashScreen extends AppCompatActivity {
+
+    private BroadcastReceiver mRegistrationBroadcastReceiver;
 
     public static final String LOGINPREF = "loginpref" ;
     SharedPreferences sharedpreferences;
@@ -23,6 +32,36 @@ public class SplashScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         //set the content view for this activity
         setContentView(R.layout.splash_screen);
+
+        mRegistrationBroadcastReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                if(intent.getAction().equals(GCMRegistrationIntentService.REGISTRATION_SUCCESS)){
+                    Toast.makeText(getApplicationContext(), "yahoo!!!", Toast.LENGTH_LONG).show();
+                }else if(intent.getAction().equals(GCMRegistrationIntentService.REGISTRATION_ERROR)){
+                    Toast.makeText(getApplicationContext(), "GCM registration error!", Toast.LENGTH_LONG).show();
+                }else{
+
+                }
+            }
+        };
+
+        //check status of google play service in device
+        int resultCode = GooglePlayServicesUtil.isGooglePlayServicesAvailable(getApplicationContext());
+        if(ConnectionResult.SUCCESS != resultCode){
+            //check type of error
+            if(GooglePlayServicesUtil.isUserRecoverableError(resultCode)){
+                Toast.makeText(getApplicationContext(), "Google play service is not available in this device!", Toast.LENGTH_LONG).show();
+                //so notification
+                GooglePlayServicesUtil.showErrorNotification(resultCode, getApplicationContext());
+            }else{
+                Toast.makeText(getApplicationContext(), "This device does not support for Google play service!", Toast.LENGTH_LONG).show();
+            }
+        }else{
+            //start service
+            Intent intent = new Intent(this, GCMRegistrationIntentService.class);
+            startService(intent);
+        }
 
         // set the sharedpreferences
         sharedpreferences = getSharedPreferences(LOGINPREF, Context.MODE_PRIVATE);
@@ -54,5 +93,20 @@ public class SplashScreen extends AppCompatActivity {
             }
         };
         timer.start();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        LocalBroadcastManager.getInstance(this).registerReceiver(mRegistrationBroadcastReceiver,
+                new IntentFilter(GCMRegistrationIntentService.REGISTRATION_SUCCESS));
+        LocalBroadcastManager.getInstance(this).registerReceiver(mRegistrationBroadcastReceiver,
+                new IntentFilter(GCMRegistrationIntentService.REGISTRATION_ERROR));
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(mRegistrationBroadcastReceiver);
     }
 }

@@ -17,10 +17,11 @@ import com.google.android.gms.gcm.GcmListenerService;
 public class GCMPushReceiverService extends GcmListenerService {
     @Override
     public void onMessageReceived(String from, Bundle data) {
-
+        String message = data.getString("message");
+        sendNotification(message);
     }
     private void sendNotification(String message){
-        Intent intent = null;// = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, SplashScreen.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         int requestCode = 0;
         PendingIntent pendingIntent = PendingIntent.getActivity(this, requestCode, intent, PendingIntent.FLAG_ONE_SHOT);
@@ -31,7 +32,6 @@ public class GCMPushReceiverService extends GcmListenerService {
         //build notification
         NotificationCompat.Builder noBuilder = new NotificationCompat.Builder(this)
                 .setSmallIcon(R.mipmap.ic_launcher)
-                .setContentText("Something text")
                 .setContentText(message)
                 .setAutoCancel(true)
                 .setContentIntent(pendingIntent);
