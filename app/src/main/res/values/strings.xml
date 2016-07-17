@@ -92,5 +92,8 @@
     <string name="ok">OK</string>
     <string name="email">Email</string>
     <string name="title_contact_details">User Contact Section</string>
+    <string name="you_have_following_this_classes_today">You have following these classes today</string>
+    <string name="Series">Series</string>
+    <string name="hifen">-</string>
 
 </resources>

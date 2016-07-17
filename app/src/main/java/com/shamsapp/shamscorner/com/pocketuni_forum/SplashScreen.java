@@ -37,7 +37,7 @@ public class SplashScreen extends AppCompatActivity {
             @Override
             public void onReceive(Context context, Intent intent) {
                 if(intent.getAction().equals(GCMRegistrationIntentService.REGISTRATION_SUCCESS)){
-                    Toast.makeText(getApplicationContext(), "yahoo!!!", Toast.LENGTH_LONG).show();
+
                 }else if(intent.getAction().equals(GCMRegistrationIntentService.REGISTRATION_ERROR)){
                     Toast.makeText(getApplicationContext(), "GCM registration error!", Toast.LENGTH_LONG).show();
                 }else{

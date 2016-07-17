@@ -15,13 +15,14 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class InsertMarks extends AppCompatActivity {
 
     private Spinner spSemester, spDepartment, spCourseID, spSection;
-    public static final String LOGINPREF = "loginpref" ;
+    public static final String LOGINPREF = "loginpref";
     SharedPreferences sharedpreferences;
-    private EditText noStudent, ctNo;
+    private EditText ctNo, seriesFrom, seriesTo;
     String username_text;
 
     @Override
@@ -30,12 +31,13 @@ public class InsertMarks extends AppCompatActivity {
         setContentView(R.layout.activity_insert_marks);
 
         // set and get all the instances
-        spSemester = (Spinner)findViewById(R.id.sp_semester);
-        spDepartment = (Spinner)findViewById(R.id.sp_department);
-        spCourseID = (Spinner)findViewById(R.id.sp_course_id);
-        spSection = (Spinner)findViewById(R.id.sp_section);
-        noStudent = (EditText)findViewById(R.id.no_of_student);
-        ctNo = (EditText)findViewById(R.id.ct_no);
+        spSemester = (Spinner) findViewById(R.id.sp_semester);
+        spDepartment = (Spinner) findViewById(R.id.sp_department);
+        spCourseID = (Spinner) findViewById(R.id.sp_course_id);
+        spSection = (Spinner) findViewById(R.id.sp_section);
+        ctNo = (EditText) findViewById(R.id.ct_no);
+        seriesFrom = (EditText) findViewById(R.id.series_from);
+        seriesTo = (EditText) findViewById(R.id.series_to);
 
         sharedpreferences = this.getSharedPreferences(LOGINPREF, Context.MODE_PRIVATE);
         username_text = sharedpreferences.getString("USERNAME", "");
@@ -48,43 +50,44 @@ public class InsertMarks extends AppCompatActivity {
     }
 
     public void ctGetStarted(View view) {
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-        // set title
-        alertDialogBuilder.setTitle("Data all set correctly");
+        if ("".equals(ctNo.getText().toString().trim()) || "".equals(seriesFrom.getText().toString().trim())
+                || "".equals(seriesTo.getText().toString().trim())) {
+            Toast.makeText(getApplicationContext(), "Some Contents are missing", Toast.LENGTH_LONG).show();
+        } else {
+            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+            // set title
+            alertDialogBuilder.setTitle("Data all set correctly");
 
-        // set dialog message
-        alertDialogBuilder
-                .setMessage("Are you sure ?")
-                .setCancelable(false)
-                .setPositiveButton("Yes",new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog,int id) {
-                        if(noStudent.getText().toString().trim().equals("")){
-                            Toast.makeText(getApplicationContext(), "Please enter the number of student", Toast.LENGTH_SHORT).show();
-                        }else {
+            // set dialog message
+            alertDialogBuilder
+                    .setMessage("Are you sure ?")
+                    .setCancelable(false)
+                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
                             Intent intent = new Intent(getApplicationContext(), InsertingMarks.class);
                             intent.putExtra("CTNO", ctNo.getText().toString().trim());
                             intent.putExtra("ROLLNO", username_text);
                             intent.putExtra("SEMESTER", spSemester.getSelectedItem().toString());
-                            intent.putExtra("SECTION", spSemester.getSelectedItem().toString());
-                            intent.putExtra("COURSEID", spSemester.getSelectedItem().toString());
-                            intent.putExtra("DEPARTMENT", spSemester.getSelectedItem().toString());
-                            intent.putExtra("STUDENT", noStudent.getText().toString().trim());
+                            intent.putExtra("SECTION", spSection.getSelectedItem().toString());
+                            intent.putExtra("COURSEID", spCourseID.getSelectedItem().toString());
+                            intent.putExtra("DEPARTMENT", spDepartment.getSelectedItem().toString());
+                            intent.putExtra("SERIES", seriesFrom.getText().toString().trim() + "-" + seriesTo.getText().toString().trim());
                             startActivity(intent);
                         }
-                    }
-                })
-                .setNegativeButton("No",new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog,int id) {
-                        // if this button is clicked, just close
-                        // the dialog box and do nothing
-                        dialog.cancel();
-                    }
-                });
+                    })
+                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            // if this button is clicked, just close
+                            // the dialog box and do nothing
+                            dialog.cancel();
+                        }
+                    });
 
-        // create alert dialog
-        AlertDialog alertDialog = alertDialogBuilder.create();
+            // create alert dialog
+            AlertDialog alertDialog = alertDialogBuilder.create();
 
-        // show it
-        alertDialog.show();
+            // show it
+            alertDialog.show();
+        }
     }
 }

@@ -53,6 +53,6 @@ public class ContactDetailsView extends AppCompatActivity {
         btnCall = (Button)findViewById(R.id.btn_call);
 
         new InfoActivity(this, imgProfilePicture, btnSend, btnCall, email, phone, gender, nationality, fathersName, mothersName, presentAddr,
-                parmanentAddr, regSession, rank, dateOfBirth, joiningDate, name, semester, username, section, department).execute("123086");
+                parmanentAddr, regSession, rank, dateOfBirth, joiningDate, name, semester, username, section, department).execute(id);
     }
 }

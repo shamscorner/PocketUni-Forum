@@ -59,6 +59,8 @@ public class Myself extends Fragment {
 
         btnSend = (Button)android.findViewById(R.id.send_btn);
         btnCall = (Button)android.findViewById(R.id.btn_call);
+        btnSend.setVisibility(View.INVISIBLE);
+        btnCall.setVisibility(View.INVISIBLE);
 
         // set the sharedpreferences
         sharedpreferences = getContext().getSharedPreferences(LOGINPREF, Context.MODE_PRIVATE);

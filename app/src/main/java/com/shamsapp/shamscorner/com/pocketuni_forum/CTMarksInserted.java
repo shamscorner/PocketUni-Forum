@@ -1,13 +1,9 @@
 package com.shamsapp.shamscorner.com.pocketuni_forum;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -19,9 +15,9 @@ import java.net.URLEncoder;
 public class CTMarksInserted extends AsyncTask<String, Void, String> {
 
     private TextView tvError;
-    private Context context;
-    String ctNo, rollNo, courseId, semester, marks, section, department;
+    String ctNo, rollNo, courseId, semester, marks, section, department, series;
     ProgressDialog progressDialog;
+    private Context context;
 
     public CTMarksInserted(Context context, TextView tvError){
         this.context = context;
@@ -29,7 +25,7 @@ public class CTMarksInserted extends AsyncTask<String, Void, String> {
     }
 
     protected void onPreExecute(){
-        progressDialog = ProgressDialog.show(context, "", "Please wait...", true);
+        //progressDialog = ProgressDialog.show(context, "", "Please wait...", true);
     }
 
     @Override
@@ -38,15 +34,17 @@ public class CTMarksInserted extends AsyncTask<String, Void, String> {
             ctNo = arg[0];
             rollNo = arg[1];
             courseId = arg[2];
-            semester = arg[3];
-            section = arg[4];
-            department = arg[5];
-            marks = arg[6];
+            series = arg[3];
+            semester = arg[4];
+            section = arg[5];
+            department = arg[6];
+            marks = arg[7];
 
-            String link = "http://shamscorner001.site88.net/Uni_Forumb69c5929474a3779df762577b7cce8eb/UniForum/mlogin.php";
+            String link = "http://shamscorner001.site88.net/Uni_Forumb69c5929474a3779df762577b7cce8eb/UniForum/mct_marks.php";
             String data = URLEncoder.encode("ct_no", "UTF-8") + "=" + URLEncoder.encode(ctNo, "UTF-8");
             data += "&" + URLEncoder.encode("roll_no", "UTF-8") + "=" + URLEncoder.encode(rollNo, "UTF-8");
             data += "&" + URLEncoder.encode("course_id", "UTF-8") + "=" + URLEncoder.encode(courseId, "UTF-8");
+            data += "&" + URLEncoder.encode("series", "UTF-8") + "=" + URLEncoder.encode(series, "UTF-8");
             data += "&" + URLEncoder.encode("semester", "UTF-8") + "=" + URLEncoder.encode(semester, "UTF-8");
             data += "&" + URLEncoder.encode("section", "UTF-8") + "=" + URLEncoder.encode(section, "UTF-8");
             data += "&" + URLEncoder.encode("department", "UTF-8") + "=" + URLEncoder.encode(department, "UTF-8");
@@ -74,13 +72,12 @@ public class CTMarksInserted extends AsyncTask<String, Void, String> {
             return sb.toString();
 
         }catch(Exception e){
-            Toast.makeText(context,"Error: " + e.getMessage() , Toast.LENGTH_LONG);
             return new String("Error: " + e.getMessage());
         }
     }
     @Override
     protected void onPostExecute(String result){
         tvError.setText(result);
-        progressDialog.dismiss();
+        //progressDialog.dismiss();
     }
 }

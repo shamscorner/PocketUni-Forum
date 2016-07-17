@@ -1,7 +1,7 @@
 package com.shamsapp.shamscorner.com.pocketuni_forum;
 
 /**
- * Created by shamim on 12-Jun-16.
+ * Created by shamim on 14-Jul-16.
  */
 import android.content.Context;
 import android.os.AsyncTask;
@@ -16,16 +16,15 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
 
-public class SqlInfo extends AsyncTask<String, Void, String> {
+public class SqlInfoData extends AsyncTask<String, Void, String> {
 
-    private Context context;
-    private String extra;
-    private TextView tvText;
+    private String resultText;
 
-    public SqlInfo(Context context, TextView tvText, String extra){
-        this.context = context;
-        this.tvText = tvText;
-        this.extra = extra;
+    public SqlInfoData(){
+
+    }
+    public String getResult(){
+        return resultText;
     }
 
     protected void onPreExecute(){
@@ -66,12 +65,12 @@ public class SqlInfo extends AsyncTask<String, Void, String> {
             return sb.toString();
 
         }catch(Exception e){
-            Toast.makeText(context,"Error: " + e.getMessage() , Toast.LENGTH_LONG).show();
             return new String("Error: " + e.getMessage());
         }
     }
     @Override
     protected void onPostExecute(String result){
-        tvText.setText(extra + result);
+        resultText = result;
     }
 }
+
