@@ -52,8 +52,8 @@ public class InsertingMarks extends AppCompatActivity {
 
         context = this;
 
-        btnDone = (Button)findViewById(R.id.btn_insert_done);
-        tvError = (TextView)findViewById(R.id.tvErrorCT);
+        btnDone = (Button) findViewById(R.id.btn_insert_done);
+        tvError = (TextView) findViewById(R.id.tvErrorCT);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -65,7 +65,7 @@ public class InsertingMarks extends AppCompatActivity {
         });
 
         Bundle extras = getIntent().getExtras();
-        if(extras != null){
+        if (extras != null) {
             semester = extras.getString("SEMESTER");
             section = extras.getString("SECTION");
             department = extras.getString("DEPARTMENT");
@@ -75,9 +75,9 @@ public class InsertingMarks extends AppCompatActivity {
             status = extras.getString("STATUS");
         }
 
-        inflater = (LayoutInflater)getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        inflater = (LayoutInflater) getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         inflater = LayoutInflater.from(InsertingMarks.this);
-        mainContainer = (LinearLayout)findViewById(R.id.main_container);
+        mainContainer = (LinearLayout) findViewById(R.id.main_container);
 
         new uploadToServer().execute();
 
@@ -85,25 +85,18 @@ public class InsertingMarks extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //hide the keyboard
-                try{
+                try {
                     InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                     inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
-                }catch(Exception e){
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
 
-                if(status.equals("insert")){
-                    for(int i = 0; i < noStudent; i++){
-                        new CTMarksInserted(context, tvError).execute(""+ctNo, rollNOs.get(i), courseId, series, semester, section, department, marksList.get(i).getText().toString().trim());
-                        //send a publish notification here...
-                    }
-                }else if(status.equals("edit")){
-
-                    //send a edited notification here...
-                }else if(status.equals("cancel")){
-
-                    //send a cancel notification here...
+                for (int i = 0; i < noStudent; i++) {
+                    new CTMarksInserted(context, tvError, status).execute("" + ctNo, rollNOs.get(i), courseId, series, semester, section, department, marksList.get(i).getText().toString().trim());
+                    //send a publish notification here...
                 }
+
                 getIntent().addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             }
         });
@@ -112,7 +105,8 @@ public class InsertingMarks extends AppCompatActivity {
 
     public class uploadToServer extends AsyncTask<String, Void, String> {
 
-        public uploadToServer(){}
+        public uploadToServer() {
+        }
 
         protected void onPreExecute() {
             progressDialog = ProgressDialog.show(context, "", "Please wait...", true);
@@ -120,7 +114,7 @@ public class InsertingMarks extends AppCompatActivity {
 
         @Override
         protected String doInBackground(String... arg) {
-            try{
+            try {
                 String link = "http://shamscorner001.site88.net/Uni_Forumb69c5929474a3779df762577b7cce8eb/UniForum/mHandleCTMarks.php";
                 String data = URLEncoder.encode("series", "UTF-8") + "=" + URLEncoder.encode(series, "UTF-8");
                 data += "&" + URLEncoder.encode("dept_name", "UTF-8") + "=" + URLEncoder.encode(department, "UTF-8");
@@ -142,14 +136,14 @@ public class InsertingMarks extends AppCompatActivity {
                 String line = null;
 
                 // Read Server Response
-                while((line = reader.readLine()) != null){
+                while ((line = reader.readLine()) != null) {
                     sb.append(line);
                     break;
                 }
                 return sb.toString();
 
-            }catch(Exception e){
-                Toast.makeText(context,"Error: " + e.getMessage() , Toast.LENGTH_LONG);
+            } catch (Exception e) {
+                Toast.makeText(context, "Error: " + e.getMessage(), Toast.LENGTH_LONG);
                 return new String("Error: " + e.getMessage());
             }
         }
@@ -158,12 +152,12 @@ public class InsertingMarks extends AppCompatActivity {
             String[] value = result.split("//");
             noStudent = value.length;
 
-            for(int i = 0; i < noStudent; i++){
+            for (int i = 0; i < noStudent; i++) {
                 v = inflater.inflate(R.layout.marks_input, null);
-                TextView textView = (TextView)v.findViewById(R.id.tv_roll);
+                TextView textView = (TextView) v.findViewById(R.id.tv_roll);
                 textView.setText(value[i]);
                 rollNOs.add(value[i]);
-                marksList.add((EditText)v.findViewById(R.id.edt_marks));
+                marksList.add((EditText) v.findViewById(R.id.edt_marks));
                 mainContainer.addView(v);
             }
             progressDialog.dismiss();

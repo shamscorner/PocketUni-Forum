@@ -16,13 +16,14 @@ import java.net.URLEncoder;
 public class CTMarksInserted extends AsyncTask<String, Void, String> {
 
     private TextView tvError;
-    String ctNo, rollNo, courseId, semester, marks, section, department, series;
+    String ctNo, rollNo, courseId, semester, marks, section, department, series, status;
     ProgressDialog progressDialog;
     private Context context;
 
-    public CTMarksInserted(Context context, TextView tvError){
+    public CTMarksInserted(Context context, TextView tvError, String status){
         this.context = context;
         this.tvError = tvError;
+        this.status = status;
     }
 
     protected void onPreExecute(){
@@ -50,6 +51,7 @@ public class CTMarksInserted extends AsyncTask<String, Void, String> {
             data += "&" + URLEncoder.encode("section", "UTF-8") + "=" + URLEncoder.encode(section, "UTF-8");
             data += "&" + URLEncoder.encode("department", "UTF-8") + "=" + URLEncoder.encode(department, "UTF-8");
             data += "&" + URLEncoder.encode("marks", "UTF-8") + "=" + URLEncoder.encode(marks, "UTF-8");
+            data += "&" + URLEncoder.encode("status", "UTF-8") + "=" + URLEncoder.encode(status, "UTF-8");
 
             URL url = new URL(link);
             URLConnection conn = url.openConnection();
