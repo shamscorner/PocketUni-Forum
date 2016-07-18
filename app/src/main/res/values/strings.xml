@@ -95,5 +95,9 @@
     <string name="you_have_following_this_classes_today">You have following these classes today</string>
     <string name="Series">Series</string>
     <string name="hifen">-</string>
+    <string name="title_activity_ct_mark_preview">CtMarkPreview</string>
+    <string name="cancel">Cancel</string>
+    <string name="edit">Edit</string>
+    <string name="preview_marks">Preview Result</string>
 
 </resources>

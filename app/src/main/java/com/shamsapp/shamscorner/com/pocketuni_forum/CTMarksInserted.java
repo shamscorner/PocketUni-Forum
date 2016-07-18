@@ -2,6 +2,7 @@ package com.shamsapp.shamscorner.com.pocketuni_forum;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.widget.TextView;
 
@@ -25,7 +26,7 @@ public class CTMarksInserted extends AsyncTask<String, Void, String> {
     }
 
     protected void onPreExecute(){
-        //progressDialog = ProgressDialog.show(context, "", "Please wait...", true);
+        progressDialog = ProgressDialog.show(context, "", "Please wait...", true);
     }
 
     @Override
@@ -78,6 +79,17 @@ public class CTMarksInserted extends AsyncTask<String, Void, String> {
     @Override
     protected void onPostExecute(String result){
         tvError.setText(result);
-        //progressDialog.dismiss();
+
+        Intent intent = new Intent(context, PreviousMarks.class);
+        intent.putExtra("CTNO", ctNo);
+        intent.putExtra("SEMESTER", semester);
+        intent.putExtra("SECTION", section);
+        intent.putExtra("COURSEID", courseId);
+        intent.putExtra("DEPARTMENT", department);
+        intent.putExtra("SERIES", series);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(intent);
+
+        progressDialog.dismiss();
     }
 }

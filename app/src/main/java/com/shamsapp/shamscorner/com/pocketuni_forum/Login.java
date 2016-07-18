@@ -16,6 +16,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -118,6 +119,14 @@ public class Login extends AppCompatActivity implements NavigationView.OnNavigat
     }
 
     public void login(View view) {
+        // hide the keyboard
+        try{
+            InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
         String username = edtUsername.getText().toString().trim();
         String password = edtPassword.getText().toString();
         if(isNetworkAvailable()){

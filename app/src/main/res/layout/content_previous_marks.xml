@@ -1,15 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.shamsapp.shamscorner.com.pocketuni_forum.PreviousMarks"
-    tools:showIn="@layout/activity_previous_marks">
+    tools:context="com.shamsapp.shamscorner.com.pocketuni_forum.InsertingMarks"
+    tools:showIn="@layout/activity_previous_marks"
+    android:orientation="vertical">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/bk_for">
 
-</RelativeLayout>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/roll_no"
+            android:textColor="@color/off_white"
+            android:gravity="center"/>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/off_white"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/marks"
+            android:textColor="@color/off_white"
+            android:gravity="center"/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="20dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:textColor="#ff0000"
+            android:id="@+id/tvErrorCT"/>
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:id="@+id/scrollView5" >
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/main_container">
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="5dp">
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="@string/edit"
+                    android:background="@drawable/background_button"
+                    android:textColor="@color/off_white"
+                    android:textSize="22sp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginRight="10dp"
+                    android:onClick="marksEdit"/>
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="@string/cancel"
+                    android:background="@drawable/background_button"
+                    android:textColor="@color/off_white"
+                    android:textSize="22sp"
+                    android:id="@+id/btn_insert_cancel"
+                    android:onClick="marksCancel"/>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

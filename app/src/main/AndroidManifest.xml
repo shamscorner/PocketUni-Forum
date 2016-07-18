@@ -13,9 +13,9 @@
     <!-- Creates a custom permission so only this app can receive its messages. -->
     <permission
         android:name="com.shamsapp.shamscorner.com.pocketuni_forum.permission.C2D_MESSAGE"
-        android:protectionLevel="signature"/>
+        android:protectionLevel="signature" />
 
-    <uses-permission android:name="com.shamsapp.shamscorner.com.pocketuni_forum.permission.C2D_MESSAGE"/>
+    <uses-permission android:name="com.shamsapp.shamscorner.com.pocketuni_forum.permission.C2D_MESSAGE" />
 
     <!-- This app has permission to register and receive data message. -->
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
@@ -25,7 +25,6 @@
 
     <!-- Permission to vibrate -->
     <uses-permission android:name="android.permission.VIBRATE" />
-
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -40,31 +39,38 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".SplashScreen"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"></activity>
 
-        </activity>
         <receiver
             android:name="com.google.android.gms.gcm.GcmReceiver"
             android:exported="true"
             android:permission="com.google.android.c2dm.permission.SEND">
             <intent-filter>
+
                 <!-- Receives the actual messages. -->
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
                 <!-- Receives the registration id. -->
                 <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
-                <category android:name="com.shamsapp.shamscorner.com.pocketuni_forum"/>
+
+                <category android:name="com.shamsapp.shamscorner.com.pocketuni_forum" />
             </intent-filter>
         </receiver>
-        <service android:name=".GCMPushReceiverService" android:exported="false">
+
+        <service
+            android:name=".GCMPushReceiverService"
+            android:exported="false">
             <intent-filter>
-                <action android:name="com.google.android.c2dm.intent.RECEIVE"/>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
             </intent-filter>
         </service>
-        <service android:name=".GCMRegistrationIntentService" android:exported="false">
+        <service
+            android:name=".GCMRegistrationIntentService"
+            android:exported="false">
             <intent-filter>
-                <action android:name="com.google.android.gms.iid.InstanceID"/>
+                <action android:name="com.google.android.gms.iid.InstanceID" />
             </intent-filter>
         </service>
+
         <activity
             android:name=".Login"
             android:label="@string/title_activity_login"
@@ -78,7 +84,7 @@
             android:label="@string/title_syllabus" />
         <activity
             android:name=".ClassTestInput"
-            android:theme="@style/AppTheme.NoActionBar" >
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -90,7 +96,9 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".PreviousMarks"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:label="@string/preview_marks"
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
         <activity
             android:name=".InsertingMarks"
             android:label="@string/title_activity_inserting_marks"
@@ -110,8 +118,7 @@
         <activity
             android:name=".contacts.ContactDetailsView"
             android:label="@string/title_contact_details"
-            android:theme="@style/AppTheme">
-        </activity>
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>

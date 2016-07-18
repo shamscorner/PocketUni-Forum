@@ -8,6 +8,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -50,6 +51,13 @@ public class InsertMarks extends AppCompatActivity {
     }
 
     public void ctGetStarted(View view) {
+        //hide the keyboard
+        try{
+            InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
         if ("".equals(ctNo.getText().toString().trim()) || "".equals(seriesFrom.getText().toString().trim())
                 || "".equals(seriesTo.getText().toString().trim())) {
             Toast.makeText(getApplicationContext(), "Some Contents are missing", Toast.LENGTH_LONG).show();
@@ -65,8 +73,8 @@ public class InsertMarks extends AppCompatActivity {
                     .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
                             Intent intent = new Intent(getApplicationContext(), InsertingMarks.class);
+                            intent.putExtra("STATUS", "insert");
                             intent.putExtra("CTNO", ctNo.getText().toString().trim());
-                            intent.putExtra("ROLLNO", username_text);
                             intent.putExtra("SEMESTER", spSemester.getSelectedItem().toString());
                             intent.putExtra("SECTION", spSection.getSelectedItem().toString());
                             intent.putExtra("COURSEID", spCourseID.getSelectedItem().toString());

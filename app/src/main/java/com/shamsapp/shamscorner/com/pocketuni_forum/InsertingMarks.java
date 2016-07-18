@@ -13,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -29,17 +30,18 @@ import java.util.ArrayList;
 
 public class InsertingMarks extends AppCompatActivity {
 
-    private String semester, section, department, courseId, username, series;
+    private String semester, section, department, courseId, series, status;
     private LayoutInflater inflater;
     private LinearLayout mainContainer;
-    private int noStudent, ctNo, from = 1, to;
+    private int noStudent, ctNo;
     private View v;
     private Button btnDone;
     private TextView tvError;
-    //private EditText[] editTexts = new EditText[200];
     private ArrayList<EditText> marksList = new ArrayList<>();
     private ArrayList<String> rollNOs = new ArrayList<>();
     ProgressDialog progressDialog;
+
+    private Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +49,8 @@ public class InsertingMarks extends AppCompatActivity {
         setContentView(R.layout.activity_inserting_marks);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        context = this;
 
         btnDone = (Button)findViewById(R.id.btn_insert_done);
         tvError = (TextView)findViewById(R.id.tvErrorCT);
@@ -62,39 +66,45 @@ public class InsertingMarks extends AppCompatActivity {
 
         Bundle extras = getIntent().getExtras();
         if(extras != null){
-            username = extras.getString("ROLLNO");
             semester = extras.getString("SEMESTER");
             section = extras.getString("SECTION");
             department = extras.getString("DEPARTMENT");
             courseId = extras.getString("COURSEID");
             ctNo = Integer.parseInt(extras.getString("CTNO"));
             series = extras.getString("SERIES");
+            status = extras.getString("STATUS");
         }
 
         inflater = (LayoutInflater)getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         inflater = LayoutInflater.from(InsertingMarks.this);
         mainContainer = (LinearLayout)findViewById(R.id.main_container);
 
-        /*
-        if(semester.equals("a")){
-            from = 1;
-        }else if(semester.equals("b")){
-            from = 1 + (student-1);
-        }else if(semester.equals("c")){
-            from = 1 + (student*2 - 1);
-        }
-        to = from + student;
-        */
-
         new uploadToServer().execute();
 
         btnDone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                for(int i = 0; i < noStudent; i++){
-                    //Log.d("val",(marksList.get(i)).getText().toString().trim());
-                    new CTMarksInserted(getApplicationContext(), tvError).execute(""+ctNo, rollNOs.get(i), courseId, series, semester, section, department, marksList.get(i).getText().toString().trim());
+                //hide the keyboard
+                try{
+                    InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+                }catch(Exception e){
+                    e.printStackTrace();
                 }
+
+                if(status.equals("insert")){
+                    for(int i = 0; i < noStudent; i++){
+                        new CTMarksInserted(context, tvError).execute(""+ctNo, rollNOs.get(i), courseId, series, semester, section, department, marksList.get(i).getText().toString().trim());
+                        //send a publish notification here...
+                    }
+                }else if(status.equals("edit")){
+
+                    //send a edited notification here...
+                }else if(status.equals("cancel")){
+
+                    //send a cancel notification here...
+                }
+                getIntent().addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             }
         });
     }
@@ -105,7 +115,7 @@ public class InsertingMarks extends AppCompatActivity {
         public uploadToServer(){}
 
         protected void onPreExecute() {
-            //progressDialog = ProgressDialog.show(getApplicationContext(), "", "Please wait...", true);
+            progressDialog = ProgressDialog.show(context, "", "Please wait...", true);
         }
 
         @Override
@@ -139,14 +149,13 @@ public class InsertingMarks extends AppCompatActivity {
                 return sb.toString();
 
             }catch(Exception e){
-                Toast.makeText(getApplicationContext(),"Error: " + e.getMessage() , Toast.LENGTH_LONG);
+                Toast.makeText(context,"Error: " + e.getMessage() , Toast.LENGTH_LONG);
                 return new String("Error: " + e.getMessage());
             }
         }
 
         protected void onPostExecute(String result) {
             String[] value = result.split("//");
-            Log.d("marks_value", result);
             noStudent = value.length;
 
             for(int i = 0; i < noStudent; i++){
@@ -154,12 +163,10 @@ public class InsertingMarks extends AppCompatActivity {
                 TextView textView = (TextView)v.findViewById(R.id.tv_roll);
                 textView.setText(value[i]);
                 rollNOs.add(value[i]);
-                //editTexts[i] = (EditText)v.findViewById(R.id.edt_marks);
                 marksList.add((EditText)v.findViewById(R.id.edt_marks));
                 mainContainer.addView(v);
             }
-            //progressDialog.dismiss();
+            progressDialog.dismiss();
         }
     }
-
 }
