@@ -86,6 +86,8 @@ public class CTMarksInserted extends AsyncTask<String, Void, String> {
     protected void onPostExecute(String result){
         tvError.setText(result);
         if(finalValue == noStudent-1){
+            //send a push notification here...
+
             Intent intent = new Intent(context, PreviousMarks.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             intent.putExtra("CTNO", ctNo);

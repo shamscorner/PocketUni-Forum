@@ -95,7 +95,6 @@ public class InsertingMarks extends AppCompatActivity {
 
                 for (int i = 0; i < noStudent; i++) {
                     new CTMarksInserted(context, i, noStudent, tvError, status).execute("" + ctNo, rollNOs.get(i), courseId, series, semester, section, department, marksList.get(i).getText().toString().trim());
-                    //send a publish notification here...
                 }
             }
         });

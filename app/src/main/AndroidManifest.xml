@@ -39,7 +39,9 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".SplashScreen"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>
 
         <receiver
             android:name="com.google.android.gms.gcm.GcmReceiver"
@@ -84,21 +86,14 @@
             android:label="@string/title_syllabus" />
         <activity
             android:name=".class_test.ClassTestInput"
-            android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".class_test.InsertMarks"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".class_test.PreviousMarks"
             android:label="@string/preview_marks"
-            android:theme="@style/AppTheme.NoActionBar" >
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".class_test.InsertingMarks"
             android:label="@string/title_activity_inserting_marks"
@@ -118,7 +113,17 @@
         <activity
             android:name=".contacts.ContactDetailsView"
             android:label="@string/title_contact_details"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".class_test.PreviousMarksShowTab"
+            android:label="@string/title_activity_previous_marks"
+            android:theme="@style/AppTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

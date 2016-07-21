@@ -22,7 +22,7 @@ public class ClassTestInput extends TabActivity {
 
         TabHost.TabSpec previousSpec = tabHost.newTabSpec("PreviousMarks");
         previousSpec.setIndicator("Previous Marks", getResources().getDrawable(R.drawable.tab_hover));
-        previousSpec.setContent(new Intent(this, PreviousMarks.class));
+        previousSpec.setContent(new Intent(this, PreviousMarksShowTab.class));
 
         tabHost.addTab(insertSpec);
         tabHost.addTab(previousSpec);
