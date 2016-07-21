@@ -1,4 +1,4 @@
-package com.shamsapp.shamscorner.com.pocketuni_forum;
+package com.shamsapp.shamscorner.com.pocketuni_forum.class_test;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -9,14 +9,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import com.shamsapp.shamscorner.com.pocketuni_forum.R;
+import com.shamsapp.shamscorner.com.pocketuni_forum.SpinnerItemAddition;
 
 public class InsertMarks extends AppCompatActivity {
 

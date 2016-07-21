@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.shamsapp.shamscorner.com.pocketuni_forum.PreviousMarks">
+    tools:context=".class_test.PreviousMarks">
 
     <include layout="@layout/content_previous_marks" />
 

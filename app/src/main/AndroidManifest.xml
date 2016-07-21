@@ -83,7 +83,7 @@
             android:name=".SyllbusShow"
             android:label="@string/title_syllabus" />
         <activity
-            android:name=".ClassTestInput"
+            android:name=".class_test.ClassTestInput"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -92,19 +92,19 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".InsertMarks"
+            android:name=".class_test.InsertMarks"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".PreviousMarks"
+            android:name=".class_test.PreviousMarks"
             android:label="@string/preview_marks"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
         <activity
-            android:name=".InsertingMarks"
+            android:name=".class_test.InsertingMarks"
             android:label="@string/title_activity_inserting_marks"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".ClassTestResultInput"
+            android:name=".class_test.ClassTestResultInput"
             android:label="@string/title_activity_inserting_marks"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity

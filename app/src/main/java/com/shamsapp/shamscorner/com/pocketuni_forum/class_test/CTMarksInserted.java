@@ -1,5 +1,6 @@
-package com.shamsapp.shamscorner.com.pocketuni_forum;
+package com.shamsapp.shamscorner.com.pocketuni_forum.class_test;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -19,9 +20,12 @@ public class CTMarksInserted extends AsyncTask<String, Void, String> {
     String ctNo, rollNo, courseId, semester, marks, section, department, series, status;
     ProgressDialog progressDialog;
     private Context context;
+    private int finalValue, noStudent;
 
-    public CTMarksInserted(Context context, TextView tvError, String status){
+    public CTMarksInserted(Context context, int finalValue, int noStudent, TextView tvError, String status){
         this.context = context;
+        this.finalValue = finalValue;
+        this.noStudent = noStudent;
         this.tvError = tvError;
         this.status = status;
     }
@@ -81,17 +85,18 @@ public class CTMarksInserted extends AsyncTask<String, Void, String> {
     @Override
     protected void onPostExecute(String result){
         tvError.setText(result);
-
-        Intent intent = new Intent(context, PreviousMarks.class);
-        intent.putExtra("CTNO", ctNo);
-        intent.putExtra("SEMESTER", semester);
-        intent.putExtra("SECTION", section);
-        intent.putExtra("COURSEID", courseId);
-        intent.putExtra("DEPARTMENT", department);
-        intent.putExtra("SERIES", series);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        context.startActivity(intent);
-
+        if(finalValue == noStudent-1){
+            Intent intent = new Intent(context, PreviousMarks.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.putExtra("CTNO", ctNo);
+            intent.putExtra("SEMESTER", semester);
+            intent.putExtra("SECTION", section);
+            intent.putExtra("COURSEID", courseId);
+            intent.putExtra("DEPARTMENT", department);
+            intent.putExtra("SERIES", series);
+            context.startActivity(intent);
+            ((Activity)context).finish();
+        }
         progressDialog.dismiss();
     }
 }

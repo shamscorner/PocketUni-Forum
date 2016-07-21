@@ -1,16 +1,15 @@
-package com.shamsapp.shamscorner.com.pocketuni_forum;
+package com.shamsapp.shamscorner.com.pocketuni_forum.class_test;
 
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.preference.EditTextPreference;
+import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -19,6 +18,9 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.shamsapp.shamscorner.com.pocketuni_forum.R;
+import com.shamsapp.shamscorner.com.pocketuni_forum.SqlInfo;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -39,7 +41,6 @@ public class InsertingMarks extends AppCompatActivity {
     private TextView tvError;
     private ArrayList<EditText> marksList = new ArrayList<>();
     private ArrayList<String> rollNOs = new ArrayList<>();
-    ProgressDialog progressDialog;
 
     private Context context;
 
@@ -93,18 +94,16 @@ public class InsertingMarks extends AppCompatActivity {
                 }
 
                 for (int i = 0; i < noStudent; i++) {
-                    new CTMarksInserted(context, tvError, status).execute("" + ctNo, rollNOs.get(i), courseId, series, semester, section, department, marksList.get(i).getText().toString().trim());
+                    new CTMarksInserted(context, i, noStudent, tvError, status).execute("" + ctNo, rollNOs.get(i), courseId, series, semester, section, department, marksList.get(i).getText().toString().trim());
                     //send a publish notification here...
                 }
-
-                getIntent().addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             }
         });
     }
 
 
     public class uploadToServer extends AsyncTask<String, Void, String> {
-
+        ProgressDialog progressDialog;
         public uploadToServer() {
         }
 
@@ -157,7 +156,12 @@ public class InsertingMarks extends AppCompatActivity {
                 TextView textView = (TextView) v.findViewById(R.id.tv_roll);
                 textView.setText(value[i]);
                 rollNOs.add(value[i]);
-                marksList.add((EditText) v.findViewById(R.id.edt_marks));
+                EditText editText = (EditText) v.findViewById(R.id.edt_marks);
+                if(status.equals("edit")){
+                    new SqlInfo(context, editText, "").execute(section, "marks", "ct_marks",
+                            "ct_no = "+ctNo+" and roll_no = '"+value[i]+"' and course_id = '"+courseId+"' and semester = "+semester+" and section");
+                }
+                marksList.add(editText);
                 mainContainer.addView(v);
             }
             progressDialog.dismiss();

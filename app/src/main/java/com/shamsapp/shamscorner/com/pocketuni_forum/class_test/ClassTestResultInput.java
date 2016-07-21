@@ -1,4 +1,4 @@
-package com.shamsapp.shamscorner.com.pocketuni_forum;
+package com.shamsapp.shamscorner.com.pocketuni_forum.class_test;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Spinner;
+
+import com.shamsapp.shamscorner.com.pocketuni_forum.R;
+import com.shamsapp.shamscorner.com.pocketuni_forum.SpinnerItemAddition;
 
 /**
  * Created by shamim on 19-Jun-16.

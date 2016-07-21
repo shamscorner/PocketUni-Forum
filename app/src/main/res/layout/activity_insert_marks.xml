@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.shamsapp.shamscorner.com.pocketuni_forum.InsertMarks">
+    tools:context=".class_test.InsertMarks">
 
     <ScrollView
         android:id="@+id/scrollView4"

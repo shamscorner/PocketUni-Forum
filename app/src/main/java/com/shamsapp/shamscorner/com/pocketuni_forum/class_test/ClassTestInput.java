@@ -1,11 +1,11 @@
-package com.shamsapp.shamscorner.com.pocketuni_forum;
+package com.shamsapp.shamscorner.com.pocketuni_forum.class_test;
 
 import android.app.TabActivity;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.TabHost;
+
+import com.shamsapp.shamscorner.com.pocketuni_forum.R;
 
 public class ClassTestInput extends TabActivity {
 

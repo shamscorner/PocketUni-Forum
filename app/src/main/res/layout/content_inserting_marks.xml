@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.shamsapp.shamscorner.com.pocketuni_forum.InsertingMarks"
+    tools:context=".class_test.InsertingMarks"
     tools:showIn="@layout/activity_inserting_marks"
     android:orientation="vertical">
     <LinearLayout

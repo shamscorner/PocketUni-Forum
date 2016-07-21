@@ -1,4 +1,4 @@
-package com.shamsapp.shamscorner.com.pocketuni_forum;
+package com.shamsapp.shamscorner.com.pocketuni_forum.class_test;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -12,11 +12,10 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import com.shamsapp.shamscorner.com.pocketuni_forum.R;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -24,7 +23,6 @@ import java.io.OutputStreamWriter;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
-import java.util.ArrayList;
 
 public class PreviousMarks extends AppCompatActivity {
 
@@ -35,6 +33,7 @@ public class PreviousMarks extends AppCompatActivity {
     private int noStudent;
 
     private View v;
+    private Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +41,8 @@ public class PreviousMarks extends AppCompatActivity {
         setContentView(R.layout.activity_previous_marks);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        context = this;
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -66,7 +67,7 @@ public class PreviousMarks extends AppCompatActivity {
             series = extras.getString("SERIES");
         }
 
-        new uploadToServer(this).execute();
+        new uploadToServer().execute();
     }
 
     public void marksEdit(View view) {
@@ -88,11 +89,8 @@ public class PreviousMarks extends AppCompatActivity {
 
     public class uploadToServer extends AsyncTask<String, Void, String> {
 
-        private ProgressDialog progressDialog = null;
-        private Context context;
-
-        public uploadToServer(Context context){
-            this.context = context;
+        ProgressDialog progressDialog;
+        public uploadToServer(){
         }
 
         protected void onPreExecute() {
@@ -138,6 +136,7 @@ public class PreviousMarks extends AppCompatActivity {
 
         protected void onPostExecute(String result) {
             String[] value = result.split("//");
+            Log.d("ValueResult", result);
             noStudent = value.length/2;
             int step = 0;
 
