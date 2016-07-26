@@ -35,12 +35,19 @@ public class GCMRegistrationIntentService extends IntentService {
 
     public static final String REGISTRATION_SUCCESS = "RegistrationSuccess";
     public static final String REGISTRATION_ERROR = "RegistrationError";
+
+    public static final String LOGINPREF = "loginpref" ;
+    SharedPreferences sharedpreferences;
+    private String username_text;
+
     public GCMRegistrationIntentService() {
         super("");
     }
 
     @Override
     protected void onHandleIntent(Intent intent) {
+        sharedpreferences = this.getSharedPreferences(LOGINPREF, Context.MODE_PRIVATE);
+        username_text = sharedpreferences.getString("USERNAME", "");
         registerGCM();
     }
 
@@ -80,6 +87,7 @@ public class GCMRegistrationIntentService extends IntentService {
                 String link = "http://shamscorner001.site88.net/Uni_Forumb69c5929474a3779df762577b7cce8eb/UniForum/GCM.php";
                 String data = URLEncoder.encode("action", "UTF-8") + "=" + URLEncoder.encode("add", "UTF-8");
                 data += "&" + URLEncoder.encode("tokenid", "UTF-8") + "=" + URLEncoder.encode(tokenText, "UTF-8");
+                data += "&" + URLEncoder.encode("username", "UTF-8") + "=" + URLEncoder.encode(username_text, "UTF-8");
 
                 URL url = new URL(link);
                 URLConnection conn = url.openConnection();

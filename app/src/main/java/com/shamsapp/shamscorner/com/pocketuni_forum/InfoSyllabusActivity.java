@@ -76,15 +76,17 @@ public class InfoSyllabusActivity extends AsyncTask<String, Void, String> {
     @Override
     protected void onPostExecute(String result) {
         final String[] value = result.split("//");
-        //set all the text of the views
-        tvTheory.setText(value[0]);
-        tvSessional.setText(value[1]);
-        //now work with the webview
-        String htmlText = " %s ";
-        tvSyllabus.loadData(String.format(htmlText, "<html>" + " <head></head>"
-                + " <body style=\"text-align:justify;color:#000000;background:#e75d5d;font-size: 18px;font-family: 'Lucida Sans Unicode', 'Lucida Grande', sans-serif;\">"
-                +value[2]+"</body></html>"), "text/html", "utf-8");
 
+        if(value.length > 1){
+            //set all the text of the views
+            tvTheory.setText(value[0]);
+            tvSessional.setText(value[1]);
+            //now work with the webview
+            String htmlText = " %s ";
+            tvSyllabus.loadData(String.format(htmlText, "<html>" + " <head></head>"
+                    + " <body style=\"text-align:justify;color:#000000;background:#e75d5d;font-size: 18px;font-family: 'Lucida Sans Unicode', 'Lucida Grande', sans-serif;\">"
+                    +value[2]+"</body></html>"), "text/html", "utf-8");
+        }
         progressDialog.dismiss();
     }
 }

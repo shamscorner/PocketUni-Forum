@@ -5,7 +5,12 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.shamsapp.shamscorner.com.pocketuni_forum.R;
+import com.shamsapp.shamscorner.com.pocketuni_forum.SqlInfo;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -87,6 +92,7 @@ public class CTMarksInserted extends AsyncTask<String, Void, String> {
         tvError.setText(result);
         if(finalValue == noStudent-1){
             //send a push notification here...
+            new uploadToServer().execute();
 
             Intent intent = new Intent(context, PreviousMarks.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -100,5 +106,53 @@ public class CTMarksInserted extends AsyncTask<String, Void, String> {
             ((Activity)context).finish();
         }
         progressDialog.dismiss();
+    }
+
+    public class uploadToServer extends AsyncTask<String, Void, String> {
+        public uploadToServer() {
+        }
+
+        protected void onPreExecute() {
+        }
+
+        @Override
+        protected String doInBackground(String... arg) {
+            try {
+                String link = "http://shamscorner001.site88.net/Uni_Forumb69c5929474a3779df762577b7cce8eb/UniForum/sendNotificationUserCt.php";
+                String data = URLEncoder.encode("ct_no", "UTF-8") + "=" + URLEncoder.encode(ctNo, "UTF-8");
+                data += "&" + URLEncoder.encode("course_id", "UTF-8") + "=" + URLEncoder.encode(courseId, "UTF-8");
+                data += "&" + URLEncoder.encode("semester", "UTF-8") + "=" + URLEncoder.encode(semester, "UTF-8");
+                data += "&" + URLEncoder.encode("section", "UTF-8") + "=" + URLEncoder.encode(section, "UTF-8");
+
+                URL url = new URL(link);
+                URLConnection conn = url.openConnection();
+
+                conn.setDoOutput(true);
+                OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
+
+                wr.write(data);
+                wr.flush();
+
+                BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+
+                StringBuilder sb = new StringBuilder();
+                String line = null;
+
+                // Read Server Response
+                while ((line = reader.readLine()) != null) {
+                    sb.append(line);
+                    break;
+                }
+                return sb.toString();
+
+            } catch (Exception e) {
+                Toast.makeText(context, "Error: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                return new String("Error: " + e.getMessage());
+            }
+        }
+
+        protected void onPostExecute(String result) {
+            Toast.makeText(context, result, Toast.LENGTH_SHORT).show();
+        }
     }
 }

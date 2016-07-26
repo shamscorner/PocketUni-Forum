@@ -77,14 +77,15 @@ public class InfoCourseActivityRoutine extends AsyncTask<String, Void, String> {
             return sb.toString();
 
         }catch(Exception e){
-            Toast.makeText(context,"Error: " + e.getMessage() , Toast.LENGTH_LONG);
+            Toast.makeText(context,"Error: " + e.getMessage() , Toast.LENGTH_LONG).show();
             return new String("Error: " + e.getMessage());
         }
     }
     @Override
     protected void onPostExecute(String result){
         final String[] value = result.split("//");
-        Log.d("Routine Result", result);
+        // this is for input output test
+        //Toast.makeText(context, ""+value.length , Toast.LENGTH_LONG).show();
 
         List<String> child_list = new ArrayList<>();
         int i = 0, step = -1;

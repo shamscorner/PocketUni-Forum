@@ -20,7 +20,7 @@ import com.google.android.gms.common.GooglePlayServicesUtil;
  */
 public class SplashScreen extends AppCompatActivity {
 
-    private BroadcastReceiver mRegistrationBroadcastReceiver;
+    //private BroadcastReceiver mRegistrationBroadcastReceiver;
 
     public static final String LOGINPREF = "loginpref" ;
     SharedPreferences sharedpreferences;
@@ -33,6 +33,7 @@ public class SplashScreen extends AppCompatActivity {
         //set the content view for this activity
         setContentView(R.layout.splash_screen);
 
+        /*
         mRegistrationBroadcastReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
@@ -45,6 +46,7 @@ public class SplashScreen extends AppCompatActivity {
                 }
             }
         };
+        */
 
         //check status of google play service in device
         int resultCode = GooglePlayServicesUtil.isGooglePlayServicesAvailable(getApplicationContext());
@@ -95,6 +97,7 @@ public class SplashScreen extends AppCompatActivity {
         timer.start();
     }
 
+    /*
     @Override
     protected void onResume() {
         super.onResume();
@@ -109,4 +112,5 @@ public class SplashScreen extends AppCompatActivity {
         super.onPause();
         LocalBroadcastManager.getInstance(this).unregisterReceiver(mRegistrationBroadcastReceiver);
     }
+    */
 }
