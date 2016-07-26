@@ -9,10 +9,10 @@
         android:layout_height="wrap_content"
         android:padding="5dp">
         <TextView
+            android:id="@+id/tv_ct_no"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="@string/ct_no"
             android:textSize="18sp"
             android:gravity="center"
             android:textColor="@color/off_white"/>
@@ -21,10 +21,10 @@
             android:layout_height="match_parent"
             android:background="@color/bk_for"/>
         <TextView
+            android:id="@+id/tv_ct_mark"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="@string/marks"
             android:textSize="18sp"
             android:gravity="center"
             android:textColor="@color/off_white"/>
