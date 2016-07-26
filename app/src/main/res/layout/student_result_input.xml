@@ -81,7 +81,7 @@
                 android:layout_marginBottom="30dp"
                 android:layout_marginTop="50dp"
                 android:background="@drawable/background_button"
-                android:onClick="ctGetStarted"
+                android:onClick="ctGetStartedStudent"
                 android:text="@string/get_started"
                 android:textColor="@color/off_white"
                 android:textSize="22sp" />
