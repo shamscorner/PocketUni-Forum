@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Pocket Uni-Forum</string>
+    <string name="app_name">Uni-Forum</string>
     <string name="uniforum">Uni-Forum</string>
     <string name="drawer_open">Slider Menu Opened</string>
     <string name="drawer_close">Slider Menu Closed</string>
@@ -101,5 +101,13 @@
     <string name="preview_marks">Preview Result</string>
     <string name="result_class_test">Result : Class Test</string>
     <string name="title_activity_settings">Settings</string>
+
+    <string-array name="day_list">
+        <item>A</item>
+        <item>B</item>
+        <item>C</item>
+        <item>D</item>
+        <item>E</item>
+    </string-array>
 
 </resources>

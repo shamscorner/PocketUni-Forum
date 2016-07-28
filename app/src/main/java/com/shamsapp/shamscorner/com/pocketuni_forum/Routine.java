@@ -31,8 +31,11 @@ public class Routine extends Fragment {
     List<String> listDataHeader;
     HashMap<String, List<String>> listDataChild;
     public static final String LOGINPREF = "loginpref";
+    public static final String ROUTINE = "pref_routine";
     public static final String SYLLABUS_ID = "syllabus_id";
     SharedPreferences sharedpreferences;
+    TextView tvToday;
+    private String today;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -40,6 +43,10 @@ public class Routine extends Fragment {
         View android = inflater.inflate(R.layout.routine, container, false);
         //get the list view
         expandableListView = (ExpandableListView) android.findViewById(R.id.overall_routine_view);
+        tvToday = (TextView)android.findViewById(R.id.tv_today_day);
+        sharedpreferences = getContext().getSharedPreferences(ROUTINE, Context.MODE_PRIVATE);
+        today = sharedpreferences.getString("TODAY", "");
+        tvToday.setText("Today is "+today+" day");
         LinearLayout layoutTodayHolder = (LinearLayout)android.findViewById(R.id.routine_today_holder);
 
         //preparing list data
@@ -51,7 +58,7 @@ public class Routine extends Fragment {
 
         // this is the routine today section
         //call the update to sqlite data base section
-        new UploadToServerSqlite(getContext(), layoutTodayHolder, "A").execute(username_text, type);// this have to change
+        new UploadToServerSqlite(getContext(), layoutTodayHolder, today).execute(username_text, type);// this have to change
 
         new InfoCourseActivityRoutine(getContext(), expandableListView, listAdapter, listDataHeader, listDataChild).execute(username_text, type, "A");
         new InfoCourseActivityRoutine(getContext(), expandableListView, listAdapter, listDataHeader, listDataChild).execute(username_text, type, "B");

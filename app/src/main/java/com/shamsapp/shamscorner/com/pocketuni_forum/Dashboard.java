@@ -22,6 +22,7 @@ import android.widget.Toast;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.shamsapp.shamscorner.com.pocketuni_forum.routine.UploadToServerSqlite;
+import com.shamsapp.shamscorner.com.pocketuni_forum.settings.Settings;
 import com.shamsapp.shamscorner.com.pocketuni_forum.sqlite_manager.DBHelper;
 
 public class Dashboard extends AppCompatActivity {
@@ -33,6 +34,10 @@ public class Dashboard extends AppCompatActivity {
     FragmentManager mFragmentManager;
     FragmentTransaction mFragmentTransaction;
     public static final String LOGINPREF = "loginpref" ;
+    public static final String ROUTINE = "pref_routine";
+
+    private SharedPreferences sharedpreferences;
+    private SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +56,8 @@ public class Dashboard extends AppCompatActivity {
                 }
             }
         };
+
+        insertIntoRoutienPref();
 
         /**
          *Setup the DrawerLayout and NavigationView
@@ -77,7 +84,8 @@ public class Dashboard extends AppCompatActivity {
                 mDrawerLayout.closeDrawers();
 
                 if (menuItem.getItemId() == R.id.nav_manage) {
-                    
+                    Intent intent = new Intent(getApplicationContext(), Settings.class);
+                    startActivity(intent);
                 }
                 return false;
             }
@@ -95,6 +103,21 @@ public class Dashboard extends AppCompatActivity {
         mDrawerLayout.setDrawerListener(mDrawerToggle);
 
         mDrawerToggle.syncState();
+    }
+
+    private void insertIntoRoutienPref() {
+        sharedpreferences = getSharedPreferences(ROUTINE, Context.MODE_PRIVATE);
+        editor = sharedpreferences.edit();
+        if(sharedpreferences.getString("VACATION", "").equals("")){
+            editor.putString("VACATION", "");
+        }
+        if(sharedpreferences.getString("HOLIDAYS", "").equals("")){
+            editor.putString("HOLIDAYS", "Thursday-Friday-");
+        }
+        if(sharedpreferences.getString("TODAY", "").equals("")){
+            editor.putString("TODAY", "A");
+        }
+        editor.commit();
     }
 
     public void logout(View view) {
