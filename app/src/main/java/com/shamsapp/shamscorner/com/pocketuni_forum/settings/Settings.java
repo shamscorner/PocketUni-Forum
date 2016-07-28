@@ -115,7 +115,7 @@ public class Settings extends AppCompatActivity {
     public void setVacation(View view) {
         status = 0;
         View v = inflater.inflate(R.layout.calender_view, null);
-        TextView tv = (TextView) v.findViewById(R.id.title);
+        final TextView tv = (TextView) v.findViewById(R.id.title);
         tv.setText("From");
         final CalendarView calendarView = (CalendarView) v.findViewById(R.id.calendarView);
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
@@ -139,6 +139,7 @@ public class Settings extends AppCompatActivity {
                 status++;
                 if (status == 1) {
                     from = dayOfMonth + "-" + month + "-" + year;
+                    tv.setText("To");
                 } else if (status == 2) {
                     to = dayOfMonth + "-" + month + "-" + year;
 

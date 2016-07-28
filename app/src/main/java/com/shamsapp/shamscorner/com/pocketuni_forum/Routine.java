@@ -58,7 +58,7 @@ public class Routine extends Fragment {
 
         // this is the routine today section
         //call the update to sqlite data base section
-        new UploadToServerSqlite(getContext(), layoutTodayHolder, today).execute(username_text, type);// this have to change
+        new UploadToServerSqlite(getContext(), layoutTodayHolder, today).execute(username_text, type);
 
         new InfoCourseActivityRoutine(getContext(), expandableListView, listAdapter, listDataHeader, listDataChild).execute(username_text, type, "A");
         new InfoCourseActivityRoutine(getContext(), expandableListView, listAdapter, listDataHeader, listDataChild).execute(username_text, type, "B");

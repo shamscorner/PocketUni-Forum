@@ -63,13 +63,16 @@
                 android:layout_height="3dp"
                 android:background="@color/bk_main" />
 
-            <ImageButton
-                android:id="@+id/imageButton"
+            <ToggleButton
                 android:layout_width="30dp"
                 android:layout_height="0dp"
                 android:layout_margin="5dp"
                 android:layout_weight="1"
-                android:background="@drawable/clock" />
+                style="@style/toggleButton"
+                android:background="@drawable/background_clock_toggle"
+                android:id="@+id/toggleButton" />
+
+
         </LinearLayout>
     </LinearLayout>
 
