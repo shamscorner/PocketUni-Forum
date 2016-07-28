@@ -100,5 +100,6 @@
     <string name="edit">Edit</string>
     <string name="preview_marks">Preview Result</string>
     <string name="result_class_test">Result : Class Test</string>
+    <string name="title_activity_settings">Settings</string>
 
 </resources>

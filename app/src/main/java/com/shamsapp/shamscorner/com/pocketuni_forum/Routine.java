@@ -9,10 +9,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.shamsapp.shamscorner.com.pocketuni_forum.routine.InfoCourseActivityRoutine;
+import com.shamsapp.shamscorner.com.pocketuni_forum.routine.RoutineToday;
+import com.shamsapp.shamscorner.com.pocketuni_forum.routine.UploadToServerSqlite;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -37,6 +40,7 @@ public class Routine extends Fragment {
         View android = inflater.inflate(R.layout.routine, container, false);
         //get the list view
         expandableListView = (ExpandableListView) android.findViewById(R.id.overall_routine_view);
+        LinearLayout layoutTodayHolder = (LinearLayout)android.findViewById(R.id.routine_today_holder);
 
         //preparing list data
         listDataHeader = new ArrayList<String>();
@@ -44,6 +48,10 @@ public class Routine extends Fragment {
         sharedpreferences = getContext().getSharedPreferences(LOGINPREF, Context.MODE_PRIVATE);
         final String username_text = sharedpreferences.getString("USERNAME", "");
         final String type = sharedpreferences.getString("TYPE", "");
+
+        // this is the routine today section
+        //call the update to sqlite data base section
+        new UploadToServerSqlite(getContext(), layoutTodayHolder, "A").execute(username_text, type);// this have to change
 
         new InfoCourseActivityRoutine(getContext(), expandableListView, listAdapter, listDataHeader, listDataChild).execute(username_text, type, "A");
         new InfoCourseActivityRoutine(getContext(), expandableListView, listAdapter, listDataHeader, listDataChild).execute(username_text, type, "B");

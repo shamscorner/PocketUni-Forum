@@ -21,6 +21,8 @@ import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
+import com.shamsapp.shamscorner.com.pocketuni_forum.routine.UploadToServerSqlite;
+import com.shamsapp.shamscorner.com.pocketuni_forum.sqlite_manager.DBHelper;
 
 public class Dashboard extends AppCompatActivity {
 
@@ -74,8 +76,8 @@ public class Dashboard extends AppCompatActivity {
             public boolean onNavigationItemSelected(MenuItem menuItem) {
                 mDrawerLayout.closeDrawers();
 
-                if (menuItem.getItemId() == R.id.nav_camera) {
-
+                if (menuItem.getItemId() == R.id.nav_manage) {
+                    
                 }
                 return false;
             }
