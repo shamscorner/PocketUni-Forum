@@ -69,7 +69,7 @@ public class SigninActivity extends AsyncTask<String, Void, String> {
             return sb.toString();
 
         }catch(Exception e){
-            Toast.makeText(context,"Error: " + e.getMessage() , Toast.LENGTH_LONG);
+            Toast.makeText(context,"Error: " + e.getMessage() , Toast.LENGTH_LONG).show();
             return new String("Error: " + e.getMessage());
         }
     }

@@ -63,7 +63,9 @@ public class GCMRegistrationIntentService extends IntentService {
             registrationComplete = new Intent(REGISTRATION_SUCCESS);
             registrationComplete.putExtra("token", token);
 
-            new uploadToken().execute(token);
+            if(!username_text.equals("")){
+                new uploadToken().execute(token);
+            }
         }catch(Exception e){
             Log.w("GCMRegIntentService", "Registration error");
             registrationComplete = new Intent(REGISTRATION_ERROR);
