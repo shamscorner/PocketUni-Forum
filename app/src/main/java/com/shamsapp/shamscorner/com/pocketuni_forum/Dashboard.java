@@ -63,6 +63,8 @@ public class Dashboard extends AppCompatActivity {
             }
         };
 
+        startServiceForRoutine();
+
         insertIntoRoutienPref();
 
         /**
@@ -109,6 +111,22 @@ public class Dashboard extends AppCompatActivity {
         mDrawerLayout.setDrawerListener(mDrawerToggle);
 
         mDrawerToggle.syncState();
+    }
+
+    private void startServiceForRoutine() {
+        // this section for the increment of the routine day
+        Calendar calendar = Calendar.getInstance();
+
+        calendar.set(Calendar.HOUR_OF_DAY, 12);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.AM_PM,Calendar.AM);
+
+        Intent myIntent = new Intent(Dashboard.this, RoutineReciever.class);
+        PendingIntent pendingIntentRoutine = PendingIntent.getBroadcast(Dashboard.this, 0, myIntent,0);
+
+        AlarmManager alarmManager = (AlarmManager)getSystemService(ALARM_SERVICE);
+        alarmManager.set(AlarmManager.RTC, calendar.getTimeInMillis(), pendingIntentRoutine);
     }
 
     private void insertIntoRoutienPref() {
