@@ -28,6 +28,7 @@ import android.widget.Toast;
 
 import com.shamsapp.shamscorner.com.pocketuni_forum.R;
 import com.shamsapp.shamscorner.com.pocketuni_forum.class_test.InsertingMarks;
+import com.shamsapp.shamscorner.com.pocketuni_forum.routine.PrefValue;
 import com.shamsapp.shamscorner.com.pocketuni_forum.routine.UploadToServerSqlite;
 
 import org.w3c.dom.Text;
@@ -50,6 +51,9 @@ public class Settings extends AppCompatActivity {
     private boolean isSpinnerTouched = false;
 
     private String username_text, type;
+
+    private TextView tvHolidayShow, tvVacationShow;
+    PrefValue ob = new PrefValue(getApplicationContext());
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +80,18 @@ public class Settings extends AppCompatActivity {
 
         // get all the instances
         spToday = (Spinner) findViewById(R.id.st_day_today);
+        tvHolidayShow = (TextView)findViewById(R.id.holiday_show);
+        tvVacationShow = (TextView)findViewById(R.id.vacation_show);
+
+        holidays = sharedpreferences.getString("HOLIDAYS", "");
+        vacation = sharedpreferences.getString("VACATION", "");
+
+        tvHolidayShow.setText("You currently have : " + holidays);
+        if(vacation.equals("")){
+            tvVacationShow.setText("You haven't set any vacation yet");
+        }else {
+            tvVacationShow.setText("You currently have : " + vacation);
+        }
 
         inflater = (LayoutInflater) getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         inflater = LayoutInflater.from(Settings.this);
@@ -147,6 +163,7 @@ public class Settings extends AppCompatActivity {
                     //Toast.makeText(getApplicationContext(), from+"//"+to, Toast.LENGTH_LONG).show();
                     editor.commit();
                     alertDialog.dismiss();
+                    tvVacationShow.setText("You currently have : " + ob.getVacationText());
                 }
             }
         });
@@ -184,6 +201,8 @@ public class Settings extends AppCompatActivity {
                         editor.putString("HOLIDAYS", holidays);
                         //Toast.makeText(getApplicationContext(), holidays, Toast.LENGTH_LONG).show();
                         editor.commit();
+                        PrefValue ob = new PrefValue(getApplicationContext());
+                        tvHolidayShow.setText("You currently have : " + ob.getHolidayText());
                     }
                 });
         // create alert dialog
@@ -215,5 +234,11 @@ public class Settings extends AppCompatActivity {
         ft.detach(frg);
         ft.attach(frg);
         ft.commit();
+    }
+
+    public void clearVacation(View view) {
+        editor.putString("VACATION", "");
+        editor.commit();
+        tvVacationShow.setText("You have reset your vacation schedule");
     }
 }

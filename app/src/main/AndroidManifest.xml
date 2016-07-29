@@ -77,6 +77,11 @@
             </intent-filter>
         </service>
 
+        <service android:name=".routine.RoutineService"
+            android:enabled="true" />
+
+        <receiver android:name=".routine.RoutineReciever"/>
+
         <activity
             android:name=".Login"
             android:label="@string/title_activity_login"

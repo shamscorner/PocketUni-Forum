@@ -1,5 +1,7 @@
 package com.shamsapp.shamscorner.com.pocketuni_forum;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -21,9 +23,13 @@ import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
+import com.shamsapp.shamscorner.com.pocketuni_forum.routine.RoutineReciever;
 import com.shamsapp.shamscorner.com.pocketuni_forum.routine.UploadToServerSqlite;
 import com.shamsapp.shamscorner.com.pocketuni_forum.settings.Settings;
 import com.shamsapp.shamscorner.com.pocketuni_forum.sqlite_manager.DBHelper;
+
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 public class Dashboard extends AppCompatActivity {
 

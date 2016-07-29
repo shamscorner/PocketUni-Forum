@@ -1,5 +1,7 @@
 package com.shamsapp.shamscorner.com.pocketuni_forum;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -14,6 +16,9 @@ import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
+import com.shamsapp.shamscorner.com.pocketuni_forum.routine.RoutineReciever;
+
+import java.util.Calendar;
 
 /**
  * Created by ShamimH on 21-May-16.
@@ -32,6 +37,10 @@ public class SplashScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         //set the content view for this activity
         setContentView(R.layout.splash_screen);
+
+        //start the service for the routine
+        startServiceForRoutine();
+
 
         /*
         mRegistrationBroadcastReceiver = new BroadcastReceiver() {
@@ -95,6 +104,21 @@ public class SplashScreen extends AppCompatActivity {
             }
         };
         timer.start();
+    }
+    private void startServiceForRoutine() {
+        // this section for the increment of the routine day
+        Calendar calendar = Calendar.getInstance();
+
+        calendar.set(Calendar.HOUR_OF_DAY, 8);
+        calendar.set(Calendar.MINUTE, 33);
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.AM_PM,Calendar.AM);
+
+        Intent myIntent = new Intent(SplashScreen.this, RoutineReciever.class);
+        PendingIntent pendingIntentRoutine = PendingIntent.getBroadcast(SplashScreen.this, 0, myIntent,0);
+
+        AlarmManager alarmManager = (AlarmManager)getSystemService(ALARM_SERVICE);
+        alarmManager.set(AlarmManager.RTC, calendar.getTimeInMillis(), pendingIntentRoutine);
     }
 
     /*
