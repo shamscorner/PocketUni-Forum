@@ -37,9 +37,9 @@ import java.util.ArrayList;
 
 public class Settings extends AppCompatActivity {
 
-    private Spinner spToday;
+    private Spinner spToday, spHour, spMin, spAmPm;
     private LayoutInflater inflater;
-    private String today, vacation, holidays;
+    private String today, vacation, holidays, hour, min, ampm;
     public static final String ROUTINE = "pref_routine";
     public static final String LOGINPREF = "loginpref";
 
@@ -53,7 +53,7 @@ public class Settings extends AppCompatActivity {
     private String username_text, type;
 
     private TextView tvHolidayShow, tvVacationShow;
-    PrefValue ob = new PrefValue(getApplicationContext());
+    PrefValue ob;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +61,8 @@ public class Settings extends AppCompatActivity {
         setContentView(R.layout.activity_settings);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        ob = new PrefValue(this);
 
         sharedpreferences = getSharedPreferences(LOGINPREF, Context.MODE_PRIVATE);
         username_text = sharedpreferences.getString("USERNAME", "");
@@ -80,6 +82,9 @@ public class Settings extends AppCompatActivity {
 
         // get all the instances
         spToday = (Spinner) findViewById(R.id.st_day_today);
+        spHour = (Spinner) findViewById(R.id.st_hour);
+        spMin = (Spinner) findViewById(R.id.st_min);
+        spAmPm = (Spinner) findViewById(R.id.st_am_pm);
         tvHolidayShow = (TextView)findViewById(R.id.holiday_show);
         tvVacationShow = (TextView)findViewById(R.id.vacation_show);
 
@@ -108,6 +113,27 @@ public class Settings extends AppCompatActivity {
                 return false;
             }
         });
+        spHour.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                isSpinnerTouched = true;
+                return false;
+            }
+        });
+        spMin.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                isSpinnerTouched = true;
+                return false;
+            }
+        });
+        spAmPm.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                isSpinnerTouched = true;
+                return false;
+            }
+        });
 
         spToday.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
@@ -126,6 +152,67 @@ public class Settings extends AppCompatActivity {
 
             }
         });
+
+        setAdapterForSpinner(spHour, R.array.hour);
+        setAdapterForSpinner(spMin, R.array.min);
+        setAdapterForSpinner(spAmPm, R.array.am_pm);
+
+        spHour.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(isSpinnerTouched){
+                    hour = spHour.getSelectedItem().toString();
+                    editor.putString("NOT_HOUR", hour);
+                    editor.commit();
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> arg0) {
+
+            }
+        });
+
+        spMin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(isSpinnerTouched){
+                    min = spMin.getSelectedItem().toString();
+                    editor.putString("NOT_MIN", min);
+                    editor.commit();
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> arg0) {
+
+            }
+        });
+
+        spAmPm.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(isSpinnerTouched){
+                    ampm = spAmPm.getSelectedItem().toString();
+                    editor.putString("NOT_AM_PM", ampm);
+                    editor.commit();
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> arg0) {
+
+            }
+        });
+    }
+    private void setAdapterForSpinner(Spinner sp, int arr){
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item, getResources().getStringArray(arr));
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        sp.setAdapter(dataAdapter);
     }
 
     public void setVacation(View view) {

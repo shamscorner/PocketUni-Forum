@@ -38,6 +38,28 @@ public class PrefValue {
         rington = sharedpreferences.getString(NOTIFY, "");
         return rington;
     }
+    public String getNotHour(){
+        return sharedpreferences.getString("NOT_HOUR", "");
+    }
+    public String getNotMin(){
+        return sharedpreferences.getString("NOT_MIN", "");
+    }
+    public String getNotAmPm(){
+        return sharedpreferences.getString("NOT_AM_PM", "");
+    }
+
+    public void saveNotHour(String value){
+        editor.putString("NOT_HOUR", value);
+        editor.commit();
+    }
+    public void saveNotMin(String value){
+        editor.putString("NOT_MIN", value);
+        editor.commit();
+    }
+    public void saveNotAmPm(String value){
+        editor.putString("NOT_AM_PM", value);
+        editor.commit();
+    }
 
     public void saveToday(String value){
         editor.putString(KEY_TODAY, value);
