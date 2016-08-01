@@ -80,7 +80,12 @@
         <service android:name=".routine.RoutineService"
             android:enabled="true" />
 
+        <service android:name=".routine.RoutineUpcomingNotify"
+            android:enabled="true" />
+
         <receiver android:name=".routine.RoutineReciever"/>
+
+        <receiver android:name=".routine.RoutineUpcomingNotifyReciever"/>
 
         <activity
             android:name=".Login"
@@ -131,6 +136,7 @@
             android:name=".settings.Settings"
             android:label="@string/title_activity_settings"
             android:theme="@style/AppTheme.NoActionBar">
+
         </activity>
     </application>
 

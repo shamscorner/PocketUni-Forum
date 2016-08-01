@@ -208,6 +208,13 @@
                         android:layout_weight="1" />
                 </LinearLayout>
 
+                <TextView
+                    android:id="@+id/notify_time_show"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
+
             </LinearLayout>
 
             <View

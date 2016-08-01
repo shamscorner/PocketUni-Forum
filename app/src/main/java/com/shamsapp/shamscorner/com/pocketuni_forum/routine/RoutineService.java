@@ -76,7 +76,6 @@ public class RoutineService extends Service {
         builder.setContentIntent(pendingNotificationIntent);
         builder.setOngoing(true);
         builder.setSubText("Refresh Please...");   //API level 16
-        builder.setNumber(100);
         builder.build();
 
         Notification myNotication = builder.getNotification();

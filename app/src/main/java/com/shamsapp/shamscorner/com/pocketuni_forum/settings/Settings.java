@@ -52,7 +52,7 @@ public class Settings extends AppCompatActivity {
 
     private String username_text, type;
 
-    private TextView tvHolidayShow, tvVacationShow;
+    private TextView tvHolidayShow, tvVacationShow, tvNotifyTimeShow;
     PrefValue ob;
 
     @Override
@@ -87,6 +87,7 @@ public class Settings extends AppCompatActivity {
         spAmPm = (Spinner) findViewById(R.id.st_am_pm);
         tvHolidayShow = (TextView)findViewById(R.id.holiday_show);
         tvVacationShow = (TextView)findViewById(R.id.vacation_show);
+        tvNotifyTimeShow = (TextView)findViewById(R.id.notify_time_show);
 
         holidays = sharedpreferences.getString("HOLIDAYS", "");
         vacation = sharedpreferences.getString("VACATION", "");
@@ -98,13 +99,23 @@ public class Settings extends AppCompatActivity {
             tvVacationShow.setText("You currently have : " + vacation);
         }
 
+        hour = ob.getNotHour();
+        min = ob.getNotMin();
+        ampm = ob.getNotAmPm();
+
+        if(hour.equals("") || min.equals("") || ampm.equals("")){
+            tvNotifyTimeShow.setText("Your notification setting is default : 10.00PM");
+            ob.saveNotHour("10");
+            ob.saveNotMin("00");
+            ob.saveNotAmPm("PM");
+        }else{
+            tvNotifyTimeShow.setText("Your notification setting is manual : "+hour+"."+min+ampm);
+        }
+
         inflater = (LayoutInflater) getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         inflater = LayoutInflater.from(Settings.this);
 
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_item, getResources().getStringArray(R.array.day_list));
-        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spToday.setAdapter(dataAdapter);
+        setAdapterForSpinner(spToday, R.array.day_list, ob.getToday());
 
         spToday.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -153,9 +164,10 @@ public class Settings extends AppCompatActivity {
             }
         });
 
-        setAdapterForSpinner(spHour, R.array.hour);
-        setAdapterForSpinner(spMin, R.array.min);
-        setAdapterForSpinner(spAmPm, R.array.am_pm);
+        setAdapterForSpinner(spHour, R.array.hour, hour);
+        setAdapterForSpinner(spMin, R.array.min, min);
+        setAdapterForSpinner(spAmPm, R.array.am_pm, ampm);
+
 
         spHour.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
@@ -165,6 +177,10 @@ public class Settings extends AppCompatActivity {
                     hour = spHour.getSelectedItem().toString();
                     editor.putString("NOT_HOUR", hour);
                     editor.commit();
+                    hour = ob.getNotHour();
+                    min = ob.getNotMin();
+                    ampm = ob.getNotAmPm();
+                    tvNotifyTimeShow.setText("Your notification setting is manual : "+hour+"."+min+ampm);
                 }
             }
 
@@ -182,6 +198,10 @@ public class Settings extends AppCompatActivity {
                     min = spMin.getSelectedItem().toString();
                     editor.putString("NOT_MIN", min);
                     editor.commit();
+                    hour = ob.getNotHour();
+                    min = ob.getNotMin();
+                    ampm = ob.getNotAmPm();
+                    tvNotifyTimeShow.setText("Your notification setting is manual : "+hour+"."+min+ampm);
                 }
             }
 
@@ -199,6 +219,10 @@ public class Settings extends AppCompatActivity {
                     ampm = spAmPm.getSelectedItem().toString();
                     editor.putString("NOT_AM_PM", ampm);
                     editor.commit();
+                    hour = ob.getNotHour();
+                    min = ob.getNotMin();
+                    ampm = ob.getNotAmPm();
+                    tvNotifyTimeShow.setText("Your notification setting is manual : "+hour+"."+min+ampm);
                 }
             }
 
@@ -208,11 +232,12 @@ public class Settings extends AppCompatActivity {
             }
         });
     }
-    private void setAdapterForSpinner(Spinner sp, int arr){
+    private void setAdapterForSpinner(Spinner sp, int arr, String selected){
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, getResources().getStringArray(arr));
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sp.setAdapter(dataAdapter);
+        sp.setSelection(dataAdapter.getPosition(selected));
     }
 
     public void setVacation(View view) {
