@@ -45,7 +45,7 @@ public class RoutineService extends Service {
         if(!getTodayOfWeek().equals(holiday[0]) || !getTodayOfWeek().equals(holiday[1])){
             if(ob.getVacationText().equals("")){
                 ob.saveToday(incrementDay(ob.getToday()));
-                Toast.makeText(getApplicationContext(), ob.getToday(), Toast.LENGTH_LONG).show();
+                notifyPush();
             }else{
                 String[] vacations = ob.getVacationText().split("//");
                 //long fromTime = convertCurrentTimeMills(vacations[0]);
@@ -74,7 +74,6 @@ public class RoutineService extends Service {
         builder.setContentText("Today is day - "+ ob.getToday());
         builder.setSmallIcon(R.drawable.clock);
         builder.setContentIntent(pendingNotificationIntent);
-        builder.setOngoing(true);
         builder.setSubText("Refresh Please...");   //API level 16
         builder.build();
 

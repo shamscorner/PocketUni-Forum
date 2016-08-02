@@ -175,8 +175,7 @@ public class Settings extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if(isSpinnerTouched){
                     hour = spHour.getSelectedItem().toString();
-                    editor.putString("NOT_HOUR", hour);
-                    editor.commit();
+                    ob.saveNotHour(hour);
                     hour = ob.getNotHour();
                     min = ob.getNotMin();
                     ampm = ob.getNotAmPm();
@@ -196,8 +195,7 @@ public class Settings extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if(isSpinnerTouched){
                     min = spMin.getSelectedItem().toString();
-                    editor.putString("NOT_MIN", min);
-                    editor.commit();
+                    ob.saveNotMin(min);
                     hour = ob.getNotHour();
                     min = ob.getNotMin();
                     ampm = ob.getNotAmPm();
@@ -217,8 +215,7 @@ public class Settings extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if(isSpinnerTouched){
                     ampm = spAmPm.getSelectedItem().toString();
-                    editor.putString("NOT_AM_PM", ampm);
-                    editor.commit();
+                    ob.saveNotAmPm(ampm);
                     hour = ob.getNotHour();
                     min = ob.getNotMin();
                     ampm = ob.getNotAmPm();

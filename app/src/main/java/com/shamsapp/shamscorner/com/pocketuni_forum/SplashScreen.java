@@ -16,7 +16,9 @@ import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
+import com.shamsapp.shamscorner.com.pocketuni_forum.routine.PrefValue;
 import com.shamsapp.shamscorner.com.pocketuni_forum.routine.RoutineReciever;
+import com.shamsapp.shamscorner.com.pocketuni_forum.routine.RoutineUpcomingNotifyReciever;
 
 import java.util.Calendar;
 
@@ -28,7 +30,7 @@ public class SplashScreen extends AppCompatActivity {
     //private BroadcastReceiver mRegistrationBroadcastReceiver;
 
     public static final String LOGINPREF = "loginpref" ;
-    SharedPreferences sharedpreferences;
+    private SharedPreferences sharedpreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,7 +103,6 @@ public class SplashScreen extends AppCompatActivity {
         };
         timer.start();
     }
-
     /*
     @Override
     protected void onResume() {

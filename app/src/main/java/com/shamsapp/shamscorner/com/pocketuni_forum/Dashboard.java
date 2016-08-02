@@ -23,7 +23,9 @@ import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
+import com.shamsapp.shamscorner.com.pocketuni_forum.routine.PrefValue;
 import com.shamsapp.shamscorner.com.pocketuni_forum.routine.RoutineReciever;
+import com.shamsapp.shamscorner.com.pocketuni_forum.routine.RoutineUpcomingNotifyReciever;
 import com.shamsapp.shamscorner.com.pocketuni_forum.routine.UploadToServerSqlite;
 import com.shamsapp.shamscorner.com.pocketuni_forum.settings.Settings;
 import com.shamsapp.shamscorner.com.pocketuni_forum.sqlite_manager.DBHelper;
@@ -40,8 +42,8 @@ public class Dashboard extends AppCompatActivity {
     FragmentManager mFragmentManager;
     FragmentTransaction mFragmentTransaction;
     public static final String LOGINPREF = "loginpref" ;
+    private PrefValue ob;
     public static final String ROUTINE = "pref_routine";
-
     private SharedPreferences sharedpreferences;
     private SharedPreferences.Editor editor;
 
@@ -62,10 +64,6 @@ public class Dashboard extends AppCompatActivity {
                 }
             }
         };
-
-        startServiceForRoutine();
-
-        insertIntoRoutienPref();
 
         /**
          *Setup the DrawerLayout and NavigationView
@@ -111,6 +109,11 @@ public class Dashboard extends AppCompatActivity {
         mDrawerLayout.setDrawerListener(mDrawerToggle);
 
         mDrawerToggle.syncState();
+
+        ob = new PrefValue(this);
+        insertIntoRoutienPref();
+        startServiceForRoutine();
+        startServiceForRoutineNotify();
     }
 
     private void startServiceForRoutine() {
@@ -143,6 +146,43 @@ public class Dashboard extends AppCompatActivity {
         }
         editor.commit();
     }
+    private void startServiceForRoutineNotify() {
+        // this section for the class notification of the routine day
+
+        Calendar calendar = Calendar.getInstance();
+        String hour = ob.getNotHour();
+        String min = ob.getNotMin();
+
+        if(hour.equals("")){
+            hour = "10";
+        }
+        if(min.equals("")){
+            min = "00";
+        }
+
+        calendar.set(Calendar.HOUR_OF_DAY, Integer.parseInt(hour));
+        calendar.set(Calendar.MINUTE, Integer.parseInt(min));
+        //calendar.set(Calendar.HOUR_OF_DAY, 2);
+        //calendar.set(Calendar.MINUTE, 50);
+        calendar.set(Calendar.SECOND, 0);
+        //calendar.set(Calendar.AM_PM,Calendar.PM);
+
+        String ampm = ob.getNotAmPm();
+        if(ampm.equals("AM")){
+            calendar.set(Calendar.AM_PM,Calendar.AM);
+        }else if(ampm.equals("PM")){
+            calendar.set(Calendar.AM_PM,Calendar.PM);
+        }else{
+            calendar.set(Calendar.AM_PM,Calendar.PM);
+        }
+
+        Intent myIntent = new Intent(Dashboard.this, RoutineUpcomingNotifyReciever.class);
+        PendingIntent pendingIntentRoutine = PendingIntent.getBroadcast(Dashboard.this, 0, myIntent,0);
+
+        AlarmManager alarmManager = (AlarmManager)getSystemService(ALARM_SERVICE);
+        alarmManager.set(AlarmManager.RTC, calendar.getTimeInMillis(), pendingIntentRoutine);
+    }
+
 
     public void logout(View view) {
         SharedPreferences sharedpreferences = getSharedPreferences(LOGINPREF, Context.MODE_PRIVATE);

@@ -77,15 +77,15 @@
             </intent-filter>
         </service>
 
-        <service android:name=".routine.RoutineService"
-            android:enabled="true" />
-
-        <service android:name=".routine.RoutineUpcomingNotify"
-            android:enabled="true" />
-
         <receiver android:name=".routine.RoutineReciever"/>
 
+        <service android:name=".routine.RoutineService"
+            android:exported="false" />
+
         <receiver android:name=".routine.RoutineUpcomingNotifyReciever"/>
+
+        <service android:name=".routine.RoutineUpcomingNotify"
+            android:exported="false" />
 
         <activity
             android:name=".Login"

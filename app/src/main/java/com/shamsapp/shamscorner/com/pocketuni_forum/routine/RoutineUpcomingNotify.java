@@ -53,7 +53,9 @@ public class RoutineUpcomingNotify extends Service {
         title = dbHelper.getAllData("title", "SELECT * FROM time_slot WHERE day = '"+incrementDay(today)+"'");
         time = dbHelper.getAllData("time", "SELECT * FROM time_slot WHERE day = '"+incrementDay(today)+"'");
 
-
+        for(int i = 0; i < courseId.size(); i++){
+            notifyPush(courseId.get(i), title.get(i), time.get(i), i+20);
+        }
     }
     private String incrementDay(String s){
         switch (s){
@@ -70,7 +72,7 @@ public class RoutineUpcomingNotify extends Service {
         }
         return null;
     }
-    private void notifyPush(String courseID, String courseTitle, String time){
+    private void notifyPush(String courseID, String courseTitle, String time, int id){
         NotificationManager mManager = (NotificationManager) getApplicationContext().getSystemService(getApplicationContext().NOTIFICATION_SERVICE);
         Intent intent1 = new Intent(getApplicationContext(), Dashboard.class); // have to change with a custom layout
 
@@ -83,11 +85,10 @@ public class RoutineUpcomingNotify extends Service {
         builder.setContentText(courseID + " - " + courseTitle);
         builder.setSmallIcon(R.drawable.clock);
         builder.setContentIntent(pendingNotificationIntent);
-        builder.setOngoing(true);
         builder.setSubText(time);   //API level 16
         builder.build();
 
         Notification myNotication = builder.getNotification();
-        mManager.notify(22, myNotication);
+        mManager.notify(id, myNotication);
     }
 }
