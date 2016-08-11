@@ -80,6 +80,8 @@ public class RoutineToday {
             float ongoingTimeStart = getTimeFromText(timeval[0], "\\.", true);
             float ongoingTimeEnd = getTimeFromText(timeval[1], "\\.", true);
 
+            //Toast.makeText(context, "Current : "+currentTime+" ongoing: "+ongoingTimeStart+" ongoing end: "+ongoingTimeEnd, Toast.LENGTH_LONG).show();
+
             if(currentTime < ongoingTimeStart){
                 // upcoming
                 ongoing.setImageResource(R.drawable.check);

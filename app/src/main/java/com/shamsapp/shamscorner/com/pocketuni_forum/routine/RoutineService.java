@@ -1,12 +1,15 @@
 package com.shamsapp.shamscorner.com.pocketuni_forum.routine;
 
+import android.annotation.TargetApi;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
+import android.os.Build;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.shamsapp.shamscorner.com.pocketuni_forum.Dashboard;
@@ -42,22 +45,33 @@ public class RoutineService extends Service {
         ob = new PrefValue(getApplicationContext());
 
         String[] holiday = ob.getHolidayText().split("-");
-        if(!getTodayOfWeek().equals(holiday[0]) || !getTodayOfWeek().equals(holiday[1])){
-            if(ob.getVacationText().equals("")){
-                ob.saveToday(incrementDay(ob.getToday()));
-                notifyPush();
-            }else{
-                String[] vacations = ob.getVacationText().split("//");
-                //long fromTime = convertCurrentTimeMills(vacations[0]);
-                //long toTime = convertCurrentTimeMills(vacations[1]);
-                long current = System.currentTimeMillis();
+        //Log.d("Increment Day", "Today week: "+getTodayOfWeek()+" | holiday0: "+holiday[0]+" | holiday1: "+holiday[1]);
+        if(!getTodayOfWeek().equals(holiday[0]) && !getTodayOfWeek().equals(holiday[1])){
+            Calendar today = Calendar.getInstance();
+            // Set the hour to midnight up to the millisecond
+            today.set(Calendar.HOUR_OF_DAY, 12);
+            today.set(Calendar.MINUTE, 0);
+            today.set(Calendar.SECOND, 0);
+            today.set(Calendar.AM_PM,Calendar.AM);
+            // compute currenttime - midnight to obtain the milliseconds of today
+            long milliseconds = System.currentTimeMillis()-today.getTimeInMillis();
+            if(milliseconds < 10){
 
-                if(current < convertCurrentTimeMills(vacations[0]) || current > convertCurrentTimeMills(vacations[1])){
+                if(ob.getVacationText().equals("")){
                     ob.saveToday(incrementDay(ob.getToday()));
-                    //Toast.makeText(getApplicationContext(), ob.getToday(), Toast.LENGTH_LONG).show();
-                    // show the push notification
-                    notifyPush();
+                }else{
+                    String[] vacations = ob.getVacationText().split("//");
+                    //long fromTime = convertCurrentTimeMills(vacations[0]);
+                    //long toTime = convertCurrentTimeMills(vacations[1]);
+                    long current = System.currentTimeMillis();
+
+                    if(current < convertCurrentTimeMills(vacations[0]) || current > convertCurrentTimeMills(vacations[1])){
+                        ob.saveToday(incrementDay(ob.getToday()));
+                        //Toast.makeText(getApplicationContext(), ob.getToday(), Toast.LENGTH_LONG).show();
+                        // show the push notification
+                    }
                 }
+                notifyPush();
             }
         }
     }
@@ -74,9 +88,11 @@ public class RoutineService extends Service {
         builder.setContentText("Today is day - "+ ob.getToday());
         builder.setSmallIcon(R.drawable.clock);
         builder.setContentIntent(pendingNotificationIntent);
-        builder.setSubText("Refresh Please...");   //API level 16
-        builder.build();
-
+        // check for the api version that support or not
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+            builder.setSubText("Refresh Please...");   //API level 16
+            builder.build();
+        }
         Notification myNotication = builder.getNotification();
         mManager.notify(11, myNotication);
     }

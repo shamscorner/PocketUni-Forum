@@ -26,6 +26,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.shamsapp.shamscorner.com.pocketuni_forum.Dashboard;
 import com.shamsapp.shamscorner.com.pocketuni_forum.R;
 import com.shamsapp.shamscorner.com.pocketuni_forum.class_test.InsertingMarks;
 import com.shamsapp.shamscorner.com.pocketuni_forum.routine.PrefValue;
@@ -332,17 +333,8 @@ public class Settings extends AppCompatActivity {
     }
 
     public void refreshWhole(View view) {
-        //View v = inflater.inflate(R.layout.routine, null);
-        //LinearLayout layoutTodayHolder = (LinearLayout)v.findViewById(R.id.routine_today_holder);
-        //new UploadToServerSqlite(this, layoutTodayHolder, today).execute(username_text, type);
-
-        // refresh the routine fragment class
-        Fragment frg = null;
-        frg = getSupportFragmentManager().findFragmentByTag("routine_tag");
-        final FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.detach(frg);
-        ft.attach(frg);
-        ft.commit();
+        Intent intent = new Intent(getApplicationContext(), Dashboard.class);
+        startActivity(intent);
     }
 
     public void clearVacation(View view) {

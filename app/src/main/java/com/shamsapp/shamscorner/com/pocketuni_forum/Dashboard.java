@@ -129,7 +129,7 @@ public class Dashboard extends AppCompatActivity {
         PendingIntent pendingIntentRoutine = PendingIntent.getBroadcast(Dashboard.this, 0, myIntent,0);
 
         AlarmManager alarmManager = (AlarmManager)getSystemService(ALARM_SERVICE);
-        alarmManager.set(AlarmManager.RTC, calendar.getTimeInMillis(), pendingIntentRoutine);
+        alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntentRoutine);
     }
 
     private void insertIntoRoutienPref() {
@@ -180,7 +180,7 @@ public class Dashboard extends AppCompatActivity {
         PendingIntent pendingIntentRoutine = PendingIntent.getBroadcast(Dashboard.this, 0, myIntent,0);
 
         AlarmManager alarmManager = (AlarmManager)getSystemService(ALARM_SERVICE);
-        alarmManager.set(AlarmManager.RTC, calendar.getTimeInMillis(), pendingIntentRoutine);
+        alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntentRoutine);
     }
 
 
