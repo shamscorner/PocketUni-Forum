@@ -11,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.shamsapp.shamscorner.com.pocketuni_forum.attendance.StudentAtten;
+import com.shamsapp.shamscorner.com.pocketuni_forum.attendance.TeacherAtten;
 import com.shamsapp.shamscorner.com.pocketuni_forum.class_test.ClassTestInput;
 import com.shamsapp.shamscorner.com.pocketuni_forum.class_test.ClassTestResultInput;
 
@@ -46,6 +48,20 @@ public class Results extends Fragment {
                 }else if(type.equals("student")){
                     Intent intent = new Intent(getContext(), ClassTestResultInput.class);
                     intent.putExtra("TYPE", "ct");
+                    startActivity(intent);
+                }
+            }
+        });
+
+        Button btnAtten = (Button)resultView.findViewById(R.id.button3);
+        btnAtten.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(type.equals("teacher")){
+                    Intent intent = new Intent(getContext(), TeacherAtten.class);
+                    startActivity(intent);
+                }else if(type.equals("student")){
+                    Intent intent = new Intent(getContext(), StudentAtten.class);
                     startActivity(intent);
                 }
             }

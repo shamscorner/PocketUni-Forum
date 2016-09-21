@@ -101,6 +101,10 @@
     <string name="preview_marks">Preview Result</string>
     <string name="result_class_test">Result : Class Test</string>
     <string name="title_activity_settings">Settings</string>
+    <string name="title_no_connection">Connection Error</string>
+    <string name="no_internet_connection">No Internet Connection</string>
+    <string name="text_no_connection_error">Please check your internet connection. There may not be any wifi connection available or your internet data connection lost due to bad network availability.</string>
+    <string name="title_activity_attendance">Attendance Sheet</string>
 
     <string-array name="day_list">
         <item>A</item>
@@ -192,5 +196,8 @@
         <item>AM</item>
         <item>PM</item>
     </string-array>
+    <string name="title_activity_inserting_atten">InsertingAtten</string>
+    <string name="check_all">Check All</string>
+    <string name="title_activity_previous_atten">PreviousAtten</string>
 
 </resources>

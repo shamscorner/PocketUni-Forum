@@ -77,5 +77,26 @@ public class PrefValue {
         editor.putString(NOTIFY, val);
         editor.commit();
     }
+    public void saveBeforeNotHour(String value){
+        editor.putString("BEFORE_NOT_HOUR", value);
+        editor.commit();
+    }
+    public String getBeforeNotHour(){
+        return sharedpreferences.getString("BEFORE_NOT_HOUR", "");
+    }
+    public void saveBeforeNotMin(String value){
+        editor.putString("BEFORE_NOT_MIN", value);
+        editor.commit();
+    }
+    public String getBeforeNotMin(){
+        return sharedpreferences.getString("BEFORE_NOT_MIN", "");
+    }
+    public void saveCount(int value){
+        editor.putInt("COUNT", value);
+        editor.commit();
+    }
+    public int getCount(){
+        return sharedpreferences.getInt("COUNT", 0);
+    }
 
 }
