@@ -42,7 +42,13 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".SplashScreen"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
         <receiver
             android:name="com.google.android.gms.gcm.GcmReceiver"
@@ -113,7 +119,9 @@
             android:label="@string/title_syllabus" />
         <activity
             android:name=".class_test.ClassTestInput"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar" >
+
+        </activity>
         <activity
             android:name=".class_test.InsertMarks"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -155,23 +163,25 @@
         <activity
             android:name=".attendance.TeacherAtten"
             android:label="@string/title_activity_attendance">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".attendance.StudentAtten"
             android:label="@string/title_activity_attendance" />
         <activity
             android:name=".attendance.InsertingAtten"
-            android:label="@string/title_activity_inserting_atten"
+            android:label="@string/title_activity_attendance"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".attendance.PreviousAtten"
-            android:label="@string/title_activity_previous_atten"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:label="@string/title_activity_attendance"
+            android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>
+        <activity
+            android:name=".attendance.PreviousAttenShowTab"
+            android:label="@string/title_activity_attendance"
+            android:theme="@style/AppTheme" />
     </application>
 
 </manifest>

@@ -31,8 +31,8 @@ public class PreviousAtten extends AppCompatActivity {
     private LayoutInflater inflater;
     private LinearLayout mainContainer;
 
-    private String semester, section, department, courseId, series;
-    private int noStudent;
+    private String semester, section, department, courseId, series, day;
+    private int noStudent, cycle;
 
     private View v;
     private Context context;
@@ -66,6 +66,8 @@ public class PreviousAtten extends AppCompatActivity {
             department = extras.getString("DEPARTMENT");
             courseId = extras.getString("COURSEID");
             series = extras.getString("SERIES");
+            day = extras.getString("DAY");
+            cycle = extras.getInt("CYCLE");
         }
 
         new uploadToServer().execute();
@@ -84,12 +86,10 @@ public class PreviousAtten extends AppCompatActivity {
         @Override
         protected String doInBackground(String... arg) {
             try{
-                //this link has to change
-                String link = "http://shamscorner001.site88.net/Uni_Forumb69c5929474a3779df762577b7cce8eb/UniForum/mHandleCTShow.php";
-                String data = URLEncoder.encode("series", "UTF-8") + "=" + URLEncoder.encode(series, "UTF-8");
-                data += "&" + URLEncoder.encode("dept_name", "UTF-8") + "=" + URLEncoder.encode(department, "UTF-8");
+                String link = "http://shamscorner001.site88.net/Uni_Forumb69c5929474a3779df762577b7cce8eb/UniForum/mHandlePercentageShow.php";
+                String data = URLEncoder.encode("cycle", "UTF-8") + "=" + URLEncoder.encode(""+cycle, "UTF-8");
                 data += "&" + URLEncoder.encode("semester_id", "UTF-8") + "=" + URLEncoder.encode(semester, "UTF-8");
-                data += "&" + URLEncoder.encode("section", "UTF-8") + "=" + URLEncoder.encode(section, "UTF-8");
+                data += "&" + URLEncoder.encode("day", "UTF-8") + "=" + URLEncoder.encode(day, "UTF-8");
                 data += "&" + URLEncoder.encode("course_id", "UTF-8") + "=" + URLEncoder.encode(courseId, "UTF-8");
 
                 URL url = new URL(link);
@@ -120,7 +120,6 @@ public class PreviousAtten extends AppCompatActivity {
 
         protected void onPostExecute(String result) {
             String[] value = result.split("//");
-            Log.d("ValueAtten", result);
             noStudent = value.length/2;
             int step = 0;
 
@@ -130,9 +129,10 @@ public class PreviousAtten extends AppCompatActivity {
                 textView.setText(value[step]);
                 //editTexts[i] = (EditText)v.findViewById(R.id.edt_marks);
                 CheckBox checkBox = (CheckBox)v.findViewById(R.id.check_atten);
-                if(value[++step].equals("true")){
+                step++;
+                if(value[step].equals("1")){
                     checkBox.setChecked(true);
-                }else if(value[++step].equals("false")){
+                }else if(value[step].equals("0")){
                     checkBox.setChecked(false);
                 }
                 checkBox.setClickable(false);

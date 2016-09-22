@@ -36,6 +36,7 @@ public class Routine extends Fragment {
     SharedPreferences sharedpreferences;
     TextView tvToday;
     private String today;
+    private int cycle;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -46,7 +47,8 @@ public class Routine extends Fragment {
         tvToday = (TextView)android.findViewById(R.id.tv_today_day);
         sharedpreferences = getContext().getSharedPreferences(ROUTINE, Context.MODE_PRIVATE);
         today = sharedpreferences.getString("TODAY", "");
-        tvToday.setText("Today is "+today+" day");
+        cycle = sharedpreferences.getInt("CYCLE", 0);
+        tvToday.setText("Today is "+cycle+today+" day");
         LinearLayout layoutTodayHolder = (LinearLayout)android.findViewById(R.id.routine_today_holder);
 
         //preparing list data

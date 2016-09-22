@@ -9,6 +9,7 @@ import android.content.SharedPreferences;
 public class PrefValue {
     public static final String ROUTINE = "pref_routine";
     public static final String KEY_TODAY = "TODAY";
+    public static final String KEY_CYCLE = "CYCLE";
     public static final String KEY_VACATION = "VACATION";
     public static final String KEY_HOLIDAYS = "HOLIDAYS";
     public static final String NOTIFY = "NOTIFY_RING";
@@ -16,6 +17,7 @@ public class PrefValue {
     private SharedPreferences.Editor editor;
     private Context context;
     private String today, vacation, holidays, rington;
+    private int cycle;
 
     public PrefValue(Context context){
         this.context = context;
@@ -25,6 +27,10 @@ public class PrefValue {
     public String getToday(){
         today = sharedpreferences.getString(KEY_TODAY, "");
         return today;
+    }
+    public int getCycle(){
+        cycle = sharedpreferences.getInt(KEY_CYCLE, 0);
+        return cycle;
     }
     public String getVacationText(){
         vacation = sharedpreferences.getString(KEY_VACATION, "");
@@ -63,6 +69,10 @@ public class PrefValue {
 
     public void saveToday(String value){
         editor.putString(KEY_TODAY, value);
+        editor.commit();
+    }
+    public void saveCycle(int value){
+        editor.putInt(KEY_CYCLE, value);
         editor.commit();
     }
     public void saveVacationText(String value){

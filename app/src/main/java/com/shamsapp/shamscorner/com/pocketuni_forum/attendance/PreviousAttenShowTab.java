@@ -1,12 +1,12 @@
-package com.shamsapp.shamscorner.com.pocketuni_forum.class_test;
+package com.shamsapp.shamscorner.com.pocketuni_forum.attendance;
 
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -23,8 +23,10 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
 
-public class PreviousMarksShowTab extends AppCompatActivity {
-
+/**
+ * Created by shamim on 22-Sep-16.
+ */
+public class PreviousAttenShowTab extends AppCompatActivity {
     private LinearLayout mainContainer;
     private Context context;
 
@@ -46,7 +48,7 @@ public class PreviousMarksShowTab extends AppCompatActivity {
         username_text = sharedpreferences.getString("USERNAME", "");
 
         inflater = (LayoutInflater)getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        inflater = LayoutInflater.from(PreviousMarksShowTab.this);
+        inflater = LayoutInflater.from(PreviousAttenShowTab.this);
 
         mainContainer = (LinearLayout)findViewById(R.id.mark_show_holder);
 
@@ -195,7 +197,7 @@ public class PreviousMarksShowTab extends AppCompatActivity {
         protected void onPostExecute(String result) {
             String[] value = result.split("//");
 
-            Intent intent = new Intent(getApplicationContext(), PreviousMarks.class);
+            Intent intent = new Intent(getApplicationContext(), PreviousAtten.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             intent.putExtra("CTNO", ctNO);
             intent.putExtra("SEMESTER", value[0]);
@@ -208,10 +210,3 @@ public class PreviousMarksShowTab extends AppCompatActivity {
         }
     }
 }
-
-/*
-select ct_no, course.course_id as course_id, title, credit, date from ct_marks, teaches, course where ct_marks.course_id = course.course_id and ct_marks.course_id = teaches.course_id and username = 't-76bn-001'
- */
-/*
-select ct_marks.semester as semester, ct_marks.section as section, ct_marks.dept_name as dept_name, series from ct_marks, teaches where teaches.course_id = ct_marks.course_id and ct_no = 1 and ct_marks.course_id = 'CSE 100' and username = 't-76bn-001' group by semester
- */

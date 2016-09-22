@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.shamsapp.shamscorner.com.pocketuni_forum.attendance.AttendanceInput;
 import com.shamsapp.shamscorner.com.pocketuni_forum.attendance.StudentAtten;
 import com.shamsapp.shamscorner.com.pocketuni_forum.attendance.TeacherAtten;
 import com.shamsapp.shamscorner.com.pocketuni_forum.class_test.ClassTestInput;
@@ -58,7 +59,7 @@ public class Results extends Fragment {
             @Override
             public void onClick(View v) {
                 if(type.equals("teacher")){
-                    Intent intent = new Intent(getContext(), TeacherAtten.class);
+                    Intent intent = new Intent(getContext(), AttendanceInput.class);
                     startActivity(intent);
                 }else if(type.equals("student")){
                     Intent intent = new Intent(getContext(), StudentAtten.class);

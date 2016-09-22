@@ -9,6 +9,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.shamsapp.shamscorner.com.pocketuni_forum.class_test.PreviousMarks;
+import com.shamsapp.shamscorner.com.pocketuni_forum.routine.PrefValue;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -22,11 +23,12 @@ import java.net.URLEncoder;
  */
 public class AttenInserted extends AsyncTask<String, Void, String> {
 
-    private String rollNo, courseId, semester, atten, status, series, section, department;
+    private String rollNo, courseId, semester, atten, status, series, section, department, today;
     private ProgressDialog progressDialog;
     private Context context;
-    private int finalValue, noStudent;
+    private int finalValue, noStudent, cycle;
     private TextView tvError;
+    private PrefValue ob;
 
     AttenInserted(Context context, int finalValue, int noStudent, TextView tvError, String status){
         this.context = context;
@@ -34,6 +36,10 @@ public class AttenInserted extends AsyncTask<String, Void, String> {
         this.noStudent = noStudent;
         this.tvError = tvError;
         this.status = status;
+
+        ob = new PrefValue(context);
+        today = ob.getToday();
+        cycle = ob.getCycle();
     }
 
     protected void onPreExecute(){
@@ -51,13 +57,14 @@ public class AttenInserted extends AsyncTask<String, Void, String> {
             section = arg[5];
             department = arg[6];
 
-            // this link has to change for the attendance
-            String link = "http://shamscorner001.site88.net/Uni_Forumb69c5929474a3779df762577b7cce8eb/UniForum/mct_marks.php";
+            String link = "http://shamscorner001.site88.net/Uni_Forumb69c5929474a3779df762577b7cce8eb/UniForum/m_atten.php";
             String data = URLEncoder.encode("roll_no", "UTF-8") + "=" + URLEncoder.encode(rollNo, "UTF-8");
             data += "&" + URLEncoder.encode("course_id", "UTF-8") + "=" + URLEncoder.encode(courseId, "UTF-8");
             data += "&" + URLEncoder.encode("semester", "UTF-8") + "=" + URLEncoder.encode(semester, "UTF-8");
             data += "&" + URLEncoder.encode("atten", "UTF-8") + "=" + URLEncoder.encode(atten, "UTF-8");
             data += "&" + URLEncoder.encode("status", "UTF-8") + "=" + URLEncoder.encode(status, "UTF-8");
+            data += "&" + URLEncoder.encode("day", "UTF-8") + "=" + URLEncoder.encode(today, "UTF-8");
+            data += "&" + URLEncoder.encode("cycle", "UTF-8") + "=" + URLEncoder.encode(""+cycle, "UTF-8");
 
             URL url = new URL(link);
             URLConnection conn = url.openConnection();
@@ -98,6 +105,8 @@ public class AttenInserted extends AsyncTask<String, Void, String> {
             intent.putExtra("COURSEID", courseId);
             intent.putExtra("DEPARTMENT", department);
             intent.putExtra("SERIES", series);
+            intent.putExtra("DAY", today);
+            intent.putExtra("CYCLE", cycle);
             context.startActivity(intent);
             ((Activity)context).finish();
         }
@@ -113,10 +122,11 @@ public class AttenInserted extends AsyncTask<String, Void, String> {
         @Override
         protected String doInBackground(String... arg) {
             try {
-                // this link has to change for the attendance
-                String link = "http://shamscorner001.site88.net/Uni_Forumb69c5929474a3779df762577b7cce8eb/UniForum/sendNotificationUserCt.php";
+                String link = "http://shamscorner001.site88.net/Uni_Forumb69c5929474a3779df762577b7cce8eb/UniForum/sendNotificationUserAtten.php";
                 String data = URLEncoder.encode("course_id", "UTF-8") + "=" + URLEncoder.encode(courseId, "UTF-8");
                 data += "&" + URLEncoder.encode("semester", "UTF-8") + "=" + URLEncoder.encode(semester, "UTF-8");
+                data += "&" + URLEncoder.encode("day", "UTF-8") + "=" + URLEncoder.encode(today, "UTF-8");
+                data += "&" + URLEncoder.encode("cycle", "UTF-8") + "=" + URLEncoder.encode(""+cycle, "UTF-8");
 
                 URL url = new URL(link);
                 URLConnection conn = url.openConnection();
@@ -146,7 +156,7 @@ public class AttenInserted extends AsyncTask<String, Void, String> {
         }
 
         protected void onPostExecute(String result) {
-            Toast.makeText(context, result, Toast.LENGTH_SHORT).show();
+            //Toast.makeText(context, result, Toast.LENGTH_SHORT).show();
         }
     }
 }

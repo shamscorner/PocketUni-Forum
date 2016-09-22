@@ -88,12 +88,12 @@ public class InsertingAtten extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 for (int i = 0; i < noStudent; i++) {
-                    String b = "false";
+                    int b = 0;
                     if(attenList.get(i).isChecked()){
-                        b = "true";
+                        b = 1;
                     }
                     new AttenInserted(context, i, noStudent, tvError, status)
-                            .execute(rollNOs.get(i), courseId, semester, b, series, section, department);
+                            .execute(rollNOs.get(i), courseId, semester, ""+b, series, section, department);
                 }
             }
         });
@@ -169,7 +169,8 @@ public class InsertingAtten extends AppCompatActivity {
                 rollNOs.add(value[i]);
                 CheckBox checkBox = (CheckBox) v.findViewById(R.id.check_atten);
                 if(status.equals("edit")){
-                    // this section for the edit section .... and have to make it later
+                    new SqlInfoCheck(context, checkBox).execute(semester, "atten", "attendance",
+                            "roll_no = '"+value[i]+"' and course_id = '"+courseId+"' and semester");
                 }
                 attenList.add(checkBox);
                 mainContainer.addView(v);

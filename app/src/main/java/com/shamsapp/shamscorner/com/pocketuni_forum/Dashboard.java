@@ -144,6 +144,10 @@ public class Dashboard extends AppCompatActivity {
         if(sharedpreferences.getString("TODAY", "").equals("")){
             editor.putString("TODAY", "A");
         }
+
+        if(sharedpreferences.getInt("CYCLE", 0) == 0){
+            editor.putInt("CYCLE", 0);
+        }
         editor.commit();
     }
     private void startServiceForRoutineNotify() {

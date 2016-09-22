@@ -66,6 +66,11 @@ public class RoutineService extends Service {
                     long current = System.currentTimeMillis();
 
                     if(current < convertCurrentTimeMills(vacations[0]) || current > convertCurrentTimeMills(vacations[1])){
+                        if(ob.getToday().equals("A")){
+                            int cycle = ob.getCycle();
+                            cycle++;
+                            ob.saveCycle(cycle);
+                        }
                         ob.saveToday(incrementDay(ob.getToday()));
                         //Toast.makeText(getApplicationContext(), ob.getToday(), Toast.LENGTH_LONG).show();
                         // show the push notification
