@@ -70,7 +70,6 @@ public class PreviousAttenShowTab extends AppCompatActivity {
         @Override
         protected String doInBackground(String... arg) {
             try {
-                // this link has to change
                 String link = "http://shamscorner001.site88.net/Uni_Forumb69c5929474a3779df762577b7cce8eb/UniForum/mSelectAttenInfoForShowTab.php";
                 String data = URLEncoder.encode("username", "UTF-8") + "=" + URLEncoder.encode(username_text, "UTF-8");
 

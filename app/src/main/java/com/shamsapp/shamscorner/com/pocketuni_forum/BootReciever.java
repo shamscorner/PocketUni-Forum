@@ -5,6 +5,8 @@ import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+
 import com.shamsapp.shamscorner.com.pocketuni_forum.routine.PrefValue;
 import com.shamsapp.shamscorner.com.pocketuni_forum.routine.RoutineReciever;
 import com.shamsapp.shamscorner.com.pocketuni_forum.routine.RoutineUpcomingNotifyReciever;
@@ -17,12 +19,19 @@ import java.util.Calendar;
 public class BootReciever extends BroadcastReceiver {
     private Context context;
     private PrefValue ob;
+    public static final String ROUTINE = "pref_routine";
+    private SharedPreferences sharedpreferences;
+    private SharedPreferences.Editor editor;
+
     @Override
     public void onReceive(Context context, Intent intent) {
         if(intent.getAction().equals("android.intent.action.BOOT_COMPLETED")){
             // set all the alarm in here...
             this.context = context;
             ob = new PrefValue(this.context);
+
+            // start those services finally
+            insertIntoRoutienPref();
             startServiceForRoutine();
             startServiceForRoutineNotify();
         }
@@ -77,5 +86,23 @@ public class BootReciever extends BroadcastReceiver {
 
         AlarmManager alarmManager = (AlarmManager)context.getSystemService(context.ALARM_SERVICE);
         alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntentRoutine);
+    }
+    private void insertIntoRoutienPref() {
+        sharedpreferences = context.getSharedPreferences(ROUTINE, Context.MODE_PRIVATE);
+        editor = sharedpreferences.edit();
+        if(sharedpreferences.getString("VACATION", "").equals("")){
+            editor.putString("VACATION", "");
+        }
+        if(sharedpreferences.getString("HOLIDAYS", "").equals("")){
+            editor.putString("HOLIDAYS", "Thursday-Friday-");
+        }
+        if(sharedpreferences.getString("TODAY", "").equals("")){
+            editor.putString("TODAY", "A");
+        }
+
+        if(sharedpreferences.getInt("CYCLE", 0) == 0){
+            editor.putInt("CYCLE", 0);
+        }
+        editor.commit();
     }
 }

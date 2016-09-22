@@ -29,6 +29,7 @@ import android.widget.Toast;
 import com.shamsapp.shamscorner.com.pocketuni_forum.Dashboard;
 import com.shamsapp.shamscorner.com.pocketuni_forum.R;
 import com.shamsapp.shamscorner.com.pocketuni_forum.class_test.InsertingMarks;
+import com.shamsapp.shamscorner.com.pocketuni_forum.intro.PrefManager;
 import com.shamsapp.shamscorner.com.pocketuni_forum.routine.PrefValue;
 import com.shamsapp.shamscorner.com.pocketuni_forum.routine.UploadToServerSqlite;
 
@@ -38,9 +39,9 @@ import java.util.ArrayList;
 
 public class Settings extends AppCompatActivity {
 
-    private Spinner spToday, spHour, spMin, spAmPm;
+    private Spinner spToday, spHour, spMin, spAmPm, spIntro;
     private LayoutInflater inflater;
-    private String today, vacation, holidays, hour, min, ampm;
+    private String today, vacation, holidays, hour, min, ampm, introText;
     public static final String ROUTINE = "pref_routine";
     public static final String LOGINPREF = "loginpref";
 
@@ -54,7 +55,9 @@ public class Settings extends AppCompatActivity {
     private String username_text, type;
 
     private TextView tvHolidayShow, tvVacationShow, tvNotifyTimeShow;
-    PrefValue ob;
+    private PrefValue ob;
+
+    private PrefManager introPrefManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +67,7 @@ public class Settings extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         ob = new PrefValue(this);
+        introPrefManager = new PrefManager(getApplicationContext());
 
         sharedpreferences = getSharedPreferences(LOGINPREF, Context.MODE_PRIVATE);
         username_text = sharedpreferences.getString("USERNAME", "");
@@ -86,6 +90,7 @@ public class Settings extends AppCompatActivity {
         spHour = (Spinner) findViewById(R.id.st_hour);
         spMin = (Spinner) findViewById(R.id.st_min);
         spAmPm = (Spinner) findViewById(R.id.st_am_pm);
+        spIntro = (Spinner) findViewById(R.id.sp_intro_type);
         tvHolidayShow = (TextView)findViewById(R.id.holiday_show);
         tvVacationShow = (TextView)findViewById(R.id.vacation_show);
         tvNotifyTimeShow = (TextView)findViewById(R.id.notify_time_show);
@@ -103,6 +108,15 @@ public class Settings extends AppCompatActivity {
         hour = ob.getNotHour();
         min = ob.getNotMin();
         ampm = ob.getNotAmPm();
+        if(introPrefManager.isFirstTimeLaunch()){
+            introText = "Once";
+        }else{
+            if(introPrefManager.isAlwaysLaunch()){
+                introText = "Always";
+            } else{
+                introText = "None";
+            }
+        }
 
         if(hour.equals("") || min.equals("") || ampm.equals("")){
             tvNotifyTimeShow.setText("Your notification setting is default : 10.00PM");
@@ -168,7 +182,7 @@ public class Settings extends AppCompatActivity {
         setAdapterForSpinner(spHour, R.array.hour, hour);
         setAdapterForSpinner(spMin, R.array.min, min);
         setAdapterForSpinner(spAmPm, R.array.am_pm, ampm);
-
+        setAdapterForSpinner(spIntro, R.array.introText, introText);
 
         spHour.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
@@ -226,6 +240,31 @@ public class Settings extends AppCompatActivity {
 
             @Override
             public void onNothingSelected(AdapterView<?> arg0) {
+
+            }
+        });
+
+        spIntro.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(isSpinnerTouched){
+                    introText = spIntro.getSelectedItem().toString();
+                    if(introText.equals("None")){
+                        introPrefManager.setFirstTimeLaunch(false);
+                        introPrefManager.setAlwaysLaunch(false);
+                    } else if(introText.equals("Once")){
+                        introPrefManager.setFirstTimeLaunch(true);
+                        introPrefManager.setAlwaysLaunch(false);
+                    } else if(introText.equals("Always")){
+                        introPrefManager.setFirstTimeLaunch(false);
+                        introPrefManager.setAlwaysLaunch(true);
+                    }
+                }
+                Toast.makeText(getApplicationContext(), introText+ " - " + introPrefManager.isFirstTimeLaunch() + " and " + introPrefManager.isAlwaysLaunch(), Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
 
             }
         });

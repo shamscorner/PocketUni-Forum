@@ -65,6 +65,7 @@ public class AttenInserted extends AsyncTask<String, Void, String> {
             data += "&" + URLEncoder.encode("status", "UTF-8") + "=" + URLEncoder.encode(status, "UTF-8");
             data += "&" + URLEncoder.encode("day", "UTF-8") + "=" + URLEncoder.encode(today, "UTF-8");
             data += "&" + URLEncoder.encode("cycle", "UTF-8") + "=" + URLEncoder.encode(""+cycle, "UTF-8");
+            data += "&" + URLEncoder.encode("section", "UTF-8") + "=" + URLEncoder.encode(section, "UTF-8");
 
             URL url = new URL(link);
             URLConnection conn = url.openConnection();
@@ -127,6 +128,7 @@ public class AttenInserted extends AsyncTask<String, Void, String> {
                 data += "&" + URLEncoder.encode("semester", "UTF-8") + "=" + URLEncoder.encode(semester, "UTF-8");
                 data += "&" + URLEncoder.encode("day", "UTF-8") + "=" + URLEncoder.encode(today, "UTF-8");
                 data += "&" + URLEncoder.encode("cycle", "UTF-8") + "=" + URLEncoder.encode(""+cycle, "UTF-8");
+                data += "&" + URLEncoder.encode("section", "UTF-8") + "=" + URLEncoder.encode(section, "UTF-8");
 
                 URL url = new URL(link);
                 URLConnection conn = url.openConnection();

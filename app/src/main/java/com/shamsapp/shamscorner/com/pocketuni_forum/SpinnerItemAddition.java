@@ -1,11 +1,15 @@
 package com.shamsapp.shamscorner.com.pocketuni_forum;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import com.shamsapp.shamscorner.com.pocketuni_forum.error.NoConnection;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;

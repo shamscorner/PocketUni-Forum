@@ -3,6 +3,7 @@ package com.shamsapp.shamscorner.com.pocketuni_forum.attendance;
 /**
  * Created by shamim on 12-Jun-16.
  */
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
@@ -21,6 +22,7 @@ public class SqlInfoCheck extends AsyncTask<String, Void, String> {
 
     private Context context;
     private CheckBox checkBox;
+    private ProgressDialog progressDialog;
 
     public SqlInfoCheck(Context context, CheckBox checkBox){
         this.context = context;
@@ -28,6 +30,7 @@ public class SqlInfoCheck extends AsyncTask<String, Void, String> {
     }
 
     protected void onPreExecute(){
+        progressDialog = ProgressDialog.show(context, "", "Please wait...", true);
     }
 
     @Override
@@ -77,5 +80,6 @@ public class SqlInfoCheck extends AsyncTask<String, Void, String> {
         }else if(atten == 0){
             checkBox.setChecked(false);
         }
+        progressDialog.dismiss();
     }
 }
