@@ -199,5 +199,6 @@
     <string name="title_activity_inserting_atten">InsertingAtten</string>
     <string name="check_all">Check All</string>
     <string name="title_activity_previous_atten">PreviousAtten</string>
+    <string name="title_activity_overall_attendance">Overall Attendance</string>
 
 </resources>

@@ -42,7 +42,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".SplashScreen"
-            android:theme="@style/AppTheme.NoActionBar" >
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -119,9 +119,7 @@
             android:label="@string/title_syllabus" />
         <activity
             android:name=".class_test.ClassTestInput"
-            android:theme="@style/AppTheme.NoActionBar" >
-
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".class_test.InsertMarks"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -162,9 +160,7 @@
             android:label="@string/title_no_connection" />
         <activity
             android:name=".attendance.TeacherAtten"
-            android:label="@string/title_activity_attendance">
-
-        </activity>
+            android:label="@string/title_activity_attendance"></activity>
         <activity
             android:name=".attendance.StudentAtten"
             android:label="@string/title_activity_attendance" />
@@ -175,13 +171,15 @@
         <activity
             android:name=".attendance.PreviousAtten"
             android:label="@string/title_activity_attendance"
-            android:theme="@style/AppTheme.NoActionBar">
-
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".attendance.PreviousAttenShowTab"
             android:label="@string/title_activity_attendance"
             android:theme="@style/AppTheme" />
+        <activity
+            android:name=".attendance.OverallAttendance"
+            android:label="@string/title_activity_overall_attendance"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
