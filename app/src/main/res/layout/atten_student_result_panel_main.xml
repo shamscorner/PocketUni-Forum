@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:padding="5dp">
 
     <LinearLayout
@@ -32,19 +32,16 @@
 
     </LinearLayout>
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/present_mark_holder"
-        android:orientation="horizontal">
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/present_mark_holder"
+            android:orientation="vertical">
 
-    </LinearLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1px"
-        android:background="@color/bk_for"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"/>
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>

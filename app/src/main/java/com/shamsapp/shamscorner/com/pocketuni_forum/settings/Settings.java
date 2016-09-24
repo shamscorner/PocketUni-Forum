@@ -160,6 +160,13 @@ public class Settings extends AppCompatActivity {
                 return false;
             }
         });
+        spIntro.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                isSpinnerTouched = true;
+                return false;
+            }
+        });
 
         spToday.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
@@ -170,6 +177,9 @@ public class Settings extends AppCompatActivity {
                     editor.putString("TODAY", today);
                     //Toast.makeText(getApplicationContext(), today, Toast.LENGTH_LONG).show();
                     editor.commit();
+
+                    // set the attendance true again
+                    //new PrefManager(getApplicationContext()).setAttenAgain(true);
                 }
             }
 

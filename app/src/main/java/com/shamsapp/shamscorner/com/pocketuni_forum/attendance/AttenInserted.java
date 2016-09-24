@@ -9,6 +9,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.shamsapp.shamscorner.com.pocketuni_forum.class_test.PreviousMarks;
+import com.shamsapp.shamscorner.com.pocketuni_forum.intro.PrefManager;
 import com.shamsapp.shamscorner.com.pocketuni_forum.routine.PrefValue;
 
 import java.io.BufferedReader;
@@ -98,6 +99,9 @@ public class AttenInserted extends AsyncTask<String, Void, String> {
         if(finalValue == noStudent-1){
             //send a push notification here...
             new uploadToServer().execute();
+
+            // stop the attendance again
+            //new PrefManager(context).setAttenAgain(false);
 
             Intent intent = new Intent(context, PreviousAtten.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

@@ -34,17 +34,13 @@ public class WelcomeIntro extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        // Checking for first time launch - before calling setContentView()
+        // Checking for first time launch
         prefManager = new PrefManager(this);
         if (!prefManager.isFirstTimeLaunch()) {
-            launchSplashScreen();
-            finish();
-        }
-
-        if(!prefManager.isAlwaysLaunch()){
-            launchSplashScreen();
-            finish();
+            if(!prefManager.isAlwaysLaunch()){
+                launchSplashScreen();
+                finish();
+            }
         }
 
         // Making notification bar transparent

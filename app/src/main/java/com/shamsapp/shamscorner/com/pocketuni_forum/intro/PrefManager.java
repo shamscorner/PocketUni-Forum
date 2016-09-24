@@ -44,4 +44,14 @@ public class PrefManager {
     public boolean isAlwaysLaunch(){
         return pref.getBoolean(IS_ALWAYS_LAUNCH, false);
     }
+
+    /*
+    public void setAttenAgain(boolean atten){
+        editor.putBoolean("AttenAgain", atten);
+        editor.commit();
+    }
+    public boolean isAttenAvailable(){
+        return pref.getBoolean("AttenAgain", true);
+    }
+    */
 }

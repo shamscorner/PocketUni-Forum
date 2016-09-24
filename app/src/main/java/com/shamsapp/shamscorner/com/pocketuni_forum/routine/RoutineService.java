@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.shamsapp.shamscorner.com.pocketuni_forum.Dashboard;
 import com.shamsapp.shamscorner.com.pocketuni_forum.R;
 import com.shamsapp.shamscorner.com.pocketuni_forum.SplashScreen;
+import com.shamsapp.shamscorner.com.pocketuni_forum.intro.PrefManager;
 
 import java.util.Calendar;
 
@@ -72,8 +73,8 @@ public class RoutineService extends Service {
                             ob.saveCycle(cycle);
                         }
                         ob.saveToday(incrementDay(ob.getToday()));
-                        //Toast.makeText(getApplicationContext(), ob.getToday(), Toast.LENGTH_LONG).show();
-                        // show the push notification
+                        // set the attendance true again
+                        //new PrefManager(getApplicationContext()).setAttenAgain(true);
                     }
                 }
                 notifyPush();

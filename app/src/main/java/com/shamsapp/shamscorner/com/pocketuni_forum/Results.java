@@ -16,6 +16,7 @@ import com.shamsapp.shamscorner.com.pocketuni_forum.attendance.StudentAtten;
 import com.shamsapp.shamscorner.com.pocketuni_forum.attendance.TeacherAtten;
 import com.shamsapp.shamscorner.com.pocketuni_forum.class_test.ClassTestInput;
 import com.shamsapp.shamscorner.com.pocketuni_forum.class_test.ClassTestResultInput;
+import com.shamsapp.shamscorner.com.pocketuni_forum.final_result.FinalResultStudent;
 
 /**
  * Created by shamim on 06-Jun-16.
@@ -63,6 +64,19 @@ public class Results extends Fragment {
                     startActivity(intent);
                 }else if(type.equals("student")){
                     Intent intent = new Intent(getContext(), StudentAtten.class);
+                    startActivity(intent);
+                }
+            }
+        });
+
+        Button btnFinalResult = (Button)resultView.findViewById(R.id.button2);
+        btnFinalResult.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(type.equals("teacher")){
+
+                }else if(type.equals("student")){
+                    Intent intent = new Intent(getContext(), FinalResultStudent.class);
                     startActivity(intent);
                 }
             }

@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -16,6 +17,7 @@ import android.widget.Toast;
 import com.shamsapp.shamscorner.com.pocketuni_forum.R;
 import com.shamsapp.shamscorner.com.pocketuni_forum.SpinnerItemAddition;
 import com.shamsapp.shamscorner.com.pocketuni_forum.class_test.InsertingMarks;
+import com.shamsapp.shamscorner.com.pocketuni_forum.intro.PrefManager;
 
 public class TeacherAtten extends AppCompatActivity {
 
@@ -24,6 +26,7 @@ public class TeacherAtten extends AppCompatActivity {
     private String username_text;
     private static final String LOGINPREF = "loginpref";
     private SharedPreferences sharedpreferences;
+    //private Button btnGetStarted;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,12 +44,22 @@ public class TeacherAtten extends AppCompatActivity {
         spSection = (Spinner) findViewById(R.id.sp_section);
         seriesFrom = (EditText) findViewById(R.id.series_from);
         seriesTo = (EditText) findViewById(R.id.series_to);
+        //btnGetStarted = (Button)findViewById(R.id.btn_get_started);
 
         // add contents for all spinner
         new SpinnerItemAddition(this, spSemester).execute(username_text, "distinct semester", "teaches", "username");
         new SpinnerItemAddition(this, spSection).execute(username_text, "distinct section", "teaches", "username");
         new SpinnerItemAddition(this, spCourseID).execute(username_text, "distinct course_id", "teaches", "username");
         new SpinnerItemAddition(this, spDepartment).execute(username_text, "distinct dept_name", "teaches, course", "teaches.course_id = course.course_id and username");
+
+        // handle the button
+        /*
+        if(new PrefManager(this).isAttenAvailable()){
+            btnGetStarted.setEnabled(true);
+        }else{
+            btnGetStarted.setEnabled(false);
+        }
+        */
     }
 
     public void ctGetStarted(View view) {

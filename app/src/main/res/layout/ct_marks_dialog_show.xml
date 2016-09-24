@@ -6,6 +6,7 @@
     android:background="@color/bk_main"
     android:id="@+id/container_holder_ct_show">
     <TextView
+        android:id="@+id/tv_title_dialog"
         android:layout_width="match_parent"
         android:layout_height="64dp"
         android:background="@color/bk_for"
@@ -24,6 +25,7 @@
         android:layout_height="wrap_content"
         android:padding="5dp">
         <TextView
+            android:id="@+id/tv_left_title"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
@@ -36,6 +38,7 @@
             android:layout_height="match_parent"
             android:background="@color/bk_for"/>
         <TextView
+            android:id="@+id/tv_right_title"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"

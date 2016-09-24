@@ -102,7 +102,7 @@ public class PreviousAttenShowTab extends AppCompatActivity {
 
         protected void onPostExecute(String result) {
             String[] value = result.split("//");
-            Log.d("FoundForAtten", result);
+            //Log.d("FoundForAtten", result);
             int loop = value.length/4;
             int step = 0;
             for(int i = 0; i<loop; i++){
@@ -120,7 +120,7 @@ public class PreviousAttenShowTab extends AppCompatActivity {
                 step++;
                 title.setText(value[step]);
                 step++;
-                credit.setText(value[step]);
+                credit.setText("Credit : "+value[step]);
                 step++;
                 semester.setText("Semester : "+value[step]);
                 semesterId = value[step];
