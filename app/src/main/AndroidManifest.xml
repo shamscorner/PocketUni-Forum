@@ -43,7 +43,11 @@
         <activity
             android:name=".intro.WelcomeIntro"
             android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".SplashScreen"
@@ -149,7 +153,7 @@
         <activity
             android:name=".class_test.PreviousMarksShowTab"
             android:label="@string/title_activity_previous_marks"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".settings.Settings"
             android:label="@string/title_activity_settings"
@@ -161,7 +165,16 @@
             android:name=".attendance.AttendanceInput"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
+            android:name=".input_other_results.Input"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".attendance.TeacherAtten"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".input_other_results.TeacherInput"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".input_other_results.PreviousInput"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".attendance.StudentAtten"
@@ -184,12 +197,11 @@
         <activity
             android:name=".final_result.FinalResultStudent"
             android:label="@string/title_activity_final_result" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
+        <activity
+            android:name=".input_other_results.Inserting" />
+        <activity
+            android:name=".input_other_results.Previous" />
         <activity
             android:name=".final_result.FinalResultStudentDetailsShow"
             android:theme="@style/AppTheme.NoActionBar"/>

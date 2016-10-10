@@ -270,7 +270,7 @@ public class Settings extends AppCompatActivity {
                         introPrefManager.setAlwaysLaunch(true);
                     }
                 }
-                Toast.makeText(getApplicationContext(), introText+ " - " + introPrefManager.isFirstTimeLaunch() + " and " + introPrefManager.isAlwaysLaunch(), Toast.LENGTH_LONG).show();
+                //Toast.makeText(getApplicationContext(), introText+ " - " + introPrefManager.isFirstTimeLaunch() + " and " + introPrefManager.isAlwaysLaunch(), Toast.LENGTH_LONG).show();
             }
 
             @Override

@@ -17,6 +17,8 @@ import com.shamsapp.shamscorner.com.pocketuni_forum.attendance.TeacherAtten;
 import com.shamsapp.shamscorner.com.pocketuni_forum.class_test.ClassTestInput;
 import com.shamsapp.shamscorner.com.pocketuni_forum.class_test.ClassTestResultInput;
 import com.shamsapp.shamscorner.com.pocketuni_forum.final_result.FinalResultStudent;
+import com.shamsapp.shamscorner.com.pocketuni_forum.input_other_results.Input;
+import com.shamsapp.shamscorner.com.pocketuni_forum.input_other_results.Result;
 
 /**
  * Created by shamim on 06-Jun-16.
@@ -74,9 +76,59 @@ public class Results extends Fragment {
             @Override
             public void onClick(View v) {
                 if(type.equals("teacher")){
-
+                    Intent intent = new Intent(getContext(), Input.class);
+                    intent.putExtra("INPUT_TYPE", "Final-Result");
+                    startActivity(intent);
                 }else if(type.equals("student")){
                     Intent intent = new Intent(getContext(), FinalResultStudent.class);
+                    startActivity(intent);
+                }
+            }
+        });
+
+        Button btnQuiz = (Button)resultView.findViewById(R.id.button5);
+        btnQuiz.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(type.equals("teacher")){
+                    Intent intent = new Intent(getContext(), Input.class);
+                    intent.putExtra("INPUT_TYPE", "Quiz");
+                    startActivity(intent);
+                }else if(type.equals("student")){
+                    Intent intent = new Intent(getContext(), Result.class);
+                    intent.putExtra("TYPE", "ct");
+                    startActivity(intent);
+                }
+            }
+        });
+
+        Button btnviva = (Button)resultView.findViewById(R.id.button8);
+        btnviva.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(type.equals("teacher")){
+                    Intent intent = new Intent(getContext(), Input.class);
+                    intent.putExtra("INPUT_TYPE", "Board-Viva");
+                    startActivity(intent);
+                }else if(type.equals("student")){
+                    Intent intent = new Intent(getContext(), Result.class);
+                    intent.putExtra("TYPE", "viva");
+                    startActivity(intent);
+                }
+            }
+        });
+
+        Button btnLabFinal = (Button)resultView.findViewById(R.id.button7);
+        btnLabFinal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(type.equals("teacher")){
+                    Intent intent = new Intent(getContext(), Input.class);
+                    intent.putExtra("INPUT_TYPE", "Lab-Final");
+                    startActivity(intent);
+                }else if(type.equals("student")){
+                    Intent intent = new Intent(getContext(), Result.class);
+                    intent.putExtra("TYPE", "lab_final");
                     startActivity(intent);
                 }
             }

@@ -14,18 +14,18 @@
 
     <!-- Screens background color-->
     <color name="bg_screen1">#f64c73</color>
-    <color name="bg_screen2">#20d2bb</color>
+    <color name="bg_screen2">#27a494</color>
     <color name="bg_screen3">#3395ff</color>
-    <color name="bg_screen4">#c873f4</color>
-    <color name="bg_screen5">#76a350</color>
+    <color name="bg_screen4">#9a4cc2</color>
+    <color name="bg_screen5">#628644</color>
     <color name="bg_screen6">#c18e2f</color>
 
     <!-- dots inactive colors -->
     <color name="dot_dark_screen1">#d1395c</color>
-    <color name="dot_dark_screen2">#14a895</color>
+    <color name="dot_dark_screen2">#147367</color>
     <color name="dot_dark_screen3">#2278d4</color>
-    <color name="dot_dark_screen4">#a854d4</color>
-    <color name="dot_dark_screen5">#608441</color>
+    <color name="dot_dark_screen4">#8740ac</color>
+    <color name="dot_dark_screen5">#486132</color>
     <color name="dot_dark_screen6">#9e7426</color>
 
     <!-- dots active colors -->

@@ -91,7 +91,7 @@ public class SplashScreen extends AppCompatActivity {
             public void run(){
                 try{
                     int timer=0;
-                    while(timer<3000) {
+                    while(timer<3000) { // this is the timer for 3 seconds
                         sleep(100);
                         timer = timer + 100;
                     }

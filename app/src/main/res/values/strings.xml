@@ -233,5 +233,6 @@
     <string name="title_activity_final_result">Final Result</string>
     <string name="title_activity_final_result_student_details_show">FinalResultStudentDetailsShow
     </string>
+    <string name="present">Present?</string>
 
 </resources>
